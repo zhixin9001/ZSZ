@@ -1,6 +1,10 @@
 ﻿using CaptchaGen;
 using CodeCarvings.Piczard;
 using CodeCarvings.Piczard.Filters.Watermarks;
+using log4net;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,14 +51,29 @@ namespace Tests
       #endregion
 
       #region Capatcha
-      string captchaStr = CommonHelper.GenerateCaptchaCode(6);
-      using (MemoryStream ms = ImageFactory.GenerateImage(captchaStr, 60, 100, 20, 2))
-      using (FileStream fs = File.OpenWrite(@"d:\2.jpg"))
-      {
-        ms.CopyTo(fs);
-      }
+      //string captchaStr = CommonHelper.GenerateCaptchaCode(6);
+      //using (MemoryStream ms = ImageFactory.GenerateImage(captchaStr, 60, 100, 20, 2))
+      //using (FileStream fs = File.OpenWrite(@"d:\2.jpg"))
+      //{
+      //  ms.CopyTo(fs);
+      //}
       #endregion
 
+      #region Log4Net
+      //log4net.Config.XmlConfigurator.Configure();
+      //ILog log = LogManager.GetLogger(typeof(Program));
+      //log.Error("an error has occured");
+      #endregion
+
+      #region Quartz
+      IScheduler sched = new StdSchedulerFactory().GetScheduler();
+      JobDetailImpl jdBossReport = new JobDetailImpl("jbTest",typeof(JobTest));
+      IMutableTrigger triggerBossReport = CronScheduleBuilder.DailyAtHourAndMinute(22, 52).Build();//每天23:45执行一次
+      triggerBossReport.Key = new TriggerKey("triggerTest");
+      sched.ScheduleJob(jdBossReport, triggerBossReport);
+      sched.Start();
+
+      #endregion
       Console.WriteLine("OK");
       Console.ReadKey();
     }
