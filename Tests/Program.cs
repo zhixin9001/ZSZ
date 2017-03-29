@@ -67,10 +67,14 @@ namespace Tests
 
       #region Quartz
       IScheduler sched = new StdSchedulerFactory().GetScheduler();
-      JobDetailImpl jdBossReport = new JobDetailImpl("jbTest",typeof(JobTest));
-      IMutableTrigger triggerBossReport = CronScheduleBuilder.DailyAtHourAndMinute(22, 52).Build();//每天23:45执行一次
-      triggerBossReport.Key = new TriggerKey("triggerTest");
-      sched.ScheduleJob(jdBossReport, triggerBossReport);
+      JobDetailImpl jdBossReport = new JobDetailImpl("jbTest", typeof(JobTest));
+      //IMutableTrigger triggerBossReport = CronScheduleBuilder.DailyAtHourAndMinute(22, 52).Build();//每天23:45执行一次
+      CalendarIntervalScheduleBuilder builder = CalendarIntervalScheduleBuilder.Create();
+      builder.WithInterval(3, IntervalUnit.Second);
+      IMutableTrigger trigger = builder.Build();
+      trigger.Key = new TriggerKey("sdfdd");
+      //triggerBossReport.Key = new TriggerKey("triggerTest");
+      sched.ScheduleJob(jdBossReport, trigger);
       sched.Start();
 
       #endregion
