@@ -1,11 +1,15 @@
-﻿using CaptchaGen;
+﻿using Autofac;
+using CaptchaGen;
 using CodeCarvings.Piczard;
 using CodeCarvings.Piczard.Filters.Watermarks;
+using MyBLLImpl;
+using MyIBLL;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ZSZ.Common;
@@ -47,12 +51,38 @@ namespace Tests
       #endregion
 
       #region Capatcha
-      string captchaStr = CommonHelper.GenerateCaptchaCode(6);
-      using (MemoryStream ms = ImageFactory.GenerateImage(captchaStr, 60, 100, 20, 2))
-      using (FileStream fs = File.OpenWrite(@"d:\2.jpg"))
-      {
-        ms.CopyTo(fs);
-      }
+      //string captchaStr = CommonHelper.GenerateCaptchaCode(6);
+      //using (MemoryStream ms = ImageFactory.GenerateImage(captchaStr, 60, 100, 20, 2))
+      //using (FileStream fs = File.OpenWrite(@"d:\2.jpg"))
+      //{
+      //  ms.CopyTo(fs);
+      //}
+      #endregion
+
+      #region AutoFac
+      //IUserBll userBll = new UserBll();
+      //userBll.AddNew("","");
+      ContainerBuilder builder = new ContainerBuilder();
+      //builder.RegisterType<UserBll>().As<IUserBll>();
+      //builder.RegisterType<UserBll>().AsImplementedInterfaces();
+
+      Assembly asm = Assembly.Load("MyBLLImpl");
+      builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
+
+      IContainer container = builder.Build();
+      //IUserBll userBll = container.Resolve<IUserBll>();
+      //IDogBll dogBll = container.Resolve<IDogBll>();
+      //dogBll.Bark();
+      //userBll.AddNew("autofac", "");
+
+      //IEnumerable<IDogBll> dogBlls = container.Resolve<IEnumerable<IDogBll>>();
+      //foreach(var item in dogBlls)
+      //{
+      //  item.Bark();
+      //}
+
+      ISchool school = container.Resolve<ISchool>();
+      school.FangXue();
       #endregion
 
       Console.WriteLine("OK");
