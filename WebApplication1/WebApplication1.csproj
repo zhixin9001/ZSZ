@@ -146,6 +146,10 @@
       <Project>{f6993fce-05b8-4b77-a354-7db95dfbbc51}</Project>
       <Name>TestService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZSZ.Common\ZSZ.Common.csproj">
+      <Project>{241553fa-c16b-4958-806f-fcba7fb62a16}</Project>
+      <Name>ZSZ.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

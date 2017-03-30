@@ -18,5 +18,16 @@ namespace WebApplication1.Controllers
       TestHelper.Test();
       return Content(b.ToString());
     }
+
+    [HttpGet]
+    public ActionResult Test2()
+    {
+      return View();
+    }
+    //[HttpPost]
+    //public ActionResult Test2()
+    //{
+    //  return View();
+    //}
   }
 }

@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using ZSZ.Common;
 
 namespace WebApplication1
 {
@@ -26,10 +27,12 @@ namespace WebApplication1
       builder.RegisterAssemblyTypes(asm)
         .Where(t => !t.IsAbstract)
         .AsImplementedInterfaces();
-      
+
       var container = builder.Build();
       //set this container was the default resolver, mvc system will get object from this container too
       DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+      ModelBinders.Binders.Add(typeof(string), new TrimAndToDBC());
     }
   }
 }
