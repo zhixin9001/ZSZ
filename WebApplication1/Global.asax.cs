@@ -14,22 +14,25 @@ namespace WebApplication1
   {
     protected void Application_Start()
     {
+      GlobalFilters.Filters.Add(new JsonNetActionFilter());
       AreaRegistration.RegisterAllAreas();
       RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-      var builder = new ContainerBuilder();
-      //Register all cotrollers in this assembly
-      builder.RegisterControllers(typeof(MvcApplication).Assembly)
-        .PropertiesAutowired();  // the properties will be resilved automatically
-      //Get all the relative assamblies
-      Assembly asm = Assembly.Load("TestService");
-      builder.RegisterAssemblyTypes(asm)
-        .Where(t => !t.IsAbstract)
-        .AsImplementedInterfaces();
-      
-      var container = builder.Build();
-      //set this container was the default resolver, mvc system will get object from this container too
-      DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+      #region Autofac
+      //      var builder = new ContainerBuilder();
+      ////Register all cotrollers in this assembly
+      //builder.RegisterControllers(typeof(MvcApplication).Assembly)
+      //  .PropertiesAutowired();  // the properties will be resilved automatically
+      ////Get all the relative assamblies
+      //Assembly asm = Assembly.Load("TestService");
+      //builder.RegisterAssemblyTypes(asm)
+      //  .Where(t => !t.IsAbstract)
+      //  .AsImplementedInterfaces();
+
+      //var container = builder.Build();
+      ////set this container was the default resolver, mvc system will get object from this container too
+      //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+      #endregion
     }
   }
 }
