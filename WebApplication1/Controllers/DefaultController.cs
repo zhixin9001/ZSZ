@@ -30,5 +30,16 @@ namespace WebApplication1.Controllers
       var dog = new Dog { BirthDate=DateTime.Now,Id=2,Name="Dante"};
       return Json(dog);
     }
+
+    [HttpGet]
+    public ActionResult Test2()
+    {
+      return View();
+    }
+    //[HttpPost]
+    //public ActionResult Test2()
+    //{
+    //  return View();
+    //}
   }
 }
