@@ -41,5 +41,10 @@ namespace WebApplication1.Controllers
     //{
     //  return View();
     //}
+
+    public ActionResult Pager1()
+    {
+      return View();
+    }
   }
 }

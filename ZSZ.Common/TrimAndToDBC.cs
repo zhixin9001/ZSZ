@@ -49,7 +49,7 @@ namespace ZSZ.Common
       }
       return new string(c);
     }
-    
+
 
 
   }

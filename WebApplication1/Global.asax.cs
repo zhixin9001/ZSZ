@@ -20,21 +20,25 @@ namespace WebApplication1
       RouteConfig.RegisterRoutes(RouteTable.Routes);
 
       #region Autofac
-      var builder = new ContainerBuilder();
-      //Register all cotrollers in this assembly
-      builder.RegisterControllers(typeof(MvcApplication).Assembly)
-        .PropertiesAutowired();  // the properties will be resilved automatically
-      //Get all the relative assamblies
-      Assembly asm = Assembly.Load("TestService");
-      builder.RegisterAssemblyTypes(asm)
-        .Where(t => !t.IsAbstract)
-        .AsImplementedInterfaces();
+      //var builder = new ContainerBuilder();
+      ////Register all cotrollers in this assembly
+      //builder.RegisterControllers(typeof(MvcApplication).Assembly)
+      //  .PropertiesAutowired();  // the properties will be resilved automatically
+      ////Get all the relative assamblies
+      //Assembly asm = Assembly.Load("TestService");
+      //builder.RegisterAssemblyTypes(asm)
+      //  .Where(t => !t.IsAbstract)
+      //  .AsImplementedInterfaces();
 
-      var container = builder.Build();
-      //set this container was the default resolver, mvc system will get object from this container too
-      DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+      //var container = builder.Build();
+      ////set this container was the default resolver, mvc system will get object from this container too
+      //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
+      #endregion
+
+      #region ModelBinding
       ModelBinders.Binders.Add(typeof(string), new TrimAndToDBC());
+      ModelBinders.Binders.Add(typeof(int), new TrimAndToDBC());
       #endregion
     }
   }
