@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ZSZ.Common;
+using System.Net;
 
 namespace Tests
 {
@@ -86,27 +87,27 @@ namespace Tests
       #region AutoFac
       //IUserBll userBll = new UserBll();
       //userBll.AddNew("","");
-      ContainerBuilder builder = new ContainerBuilder();
-      //builder.RegisterType<UserBll>().As<IUserBll>();
-      //builder.RegisterType<UserBll>().AsImplementedInterfaces();
+      //ContainerBuilder builder = new ContainerBuilder();
+      ////builder.RegisterType<UserBll>().As<IUserBll>();
+      ////builder.RegisterType<UserBll>().AsImplementedInterfaces();
 
-      Assembly asm = Assembly.Load("MyBLLImpl");
-      builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
+      //Assembly asm = Assembly.Load("MyBLLImpl");
+      //builder.RegisterAssemblyTypes(asm).AsImplementedInterfaces().PropertiesAutowired();
 
-      IContainer container = builder.Build();
-      //IUserBll userBll = container.Resolve<IUserBll>();
-      //IDogBll dogBll = container.Resolve<IDogBll>();
-      //dogBll.Bark();
-      //userBll.AddNew("autofac", "");
+      //IContainer container = builder.Build();
+      ////IUserBll userBll = container.Resolve<IUserBll>();
+      ////IDogBll dogBll = container.Resolve<IDogBll>();
+      ////dogBll.Bark();
+      ////userBll.AddNew("autofac", "");
 
-      //IEnumerable<IDogBll> dogBlls = container.Resolve<IEnumerable<IDogBll>>();
-      //foreach(var item in dogBlls)
-      //{
-      //  item.Bark();
-      //}
+      ////IEnumerable<IDogBll> dogBlls = container.Resolve<IEnumerable<IDogBll>>();
+      ////foreach(var item in dogBlls)
+      ////{
+      ////  item.Bark();
+      ////}
 
-      ISchool school = container.Resolve<ISchool>();
-      school.FangXue();
+      //ISchool school = container.Resolve<ISchool>();
+      //school.FangXue();
       //string captchaStr = CommonHelper.GenerateCaptchaCode(6);
       //using (MemoryStream ms = ImageFactory.GenerateImage(captchaStr, 60, 100, 20, 2))
       //using (FileStream fs = File.OpenWrite(@"d:\2.jpg"))
@@ -114,8 +115,41 @@ namespace Tests
       //  ms.CopyTo(fs);
       //}
       #endregion
+
+      #region SMS
+      //string userName = "zhixin";
+      //string appKey = "7e4055bc468ed92ef1134d";
+      //string templateId = "193";
+      //string code = "6666";
+      //string phoneNum = "15354567890";
+      //WebClient wc = new WebClient();
+
+      //string downLoadString = "http://sms.rupeng.cn/SendSms.ashx?userName={0}&appKey={1}&templateId={2}&code={3}&phoneNum={4}";
+      //string response = wc.DownloadString(string.Format(downLoadString
+      //   , Uri.EscapeDataString(userName)
+      //   , Uri.EscapeDataString(appKey)
+      //   , Uri.EscapeDataString(templateId)
+      //   , Uri.EscapeDataString(code)
+      //   , Uri.EscapeDataString(phoneNum)));   
+      #endregion
+
+      #region UnitTest Simulate
+      AsertEqual(Add(0, 1), 1);
+      AsertEqual(Add(0, 1), 2);
+      #endregion
       Console.WriteLine("OK");
       Console.ReadKey();
+    }
+
+    public static int Add(int i, int j)
+    {
+      return i + j;
+    }
+
+    public static void AsertEqual(int value, int expectValue)
+    {
+      if (value != expectValue)
+        throw new Exception("Bug Occured");
     }
   }
 }
