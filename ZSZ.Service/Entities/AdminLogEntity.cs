@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZSZ.Service.Entities.RBAC;
 
 namespace ZSZ.Service.Entities
 {
   public class AdminLogEntity : BaseEntity
   {
-    public long UserId { get; set; }
+    public long AdminUserId { get; set; }
+    public virtual AdminUserEntity AdminUser { get; set; }
     public string Msg { get; set; }
   }
 }

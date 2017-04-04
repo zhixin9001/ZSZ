@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ZSZ.Service.Entities
 {
-  public class RegionEntity:BaseEntity
+  public class RegionEntity : BaseEntity
   {
     public string Name { get; set; }
     public long CItyId { get; set; }
+    public virtual CityEntity City { get; set; }
   }
 }

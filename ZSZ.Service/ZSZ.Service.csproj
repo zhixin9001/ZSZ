@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,11 +61,25 @@
     <Compile Include="Entities\RBAC\RoleEntity.cs" />
     <Compile Include="Entities\RegionEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="ModelConfig\AdminLogConfig.cs" />
+    <Compile Include="ModelConfig\AttachmentConfig.cs" />
+    <Compile Include="ModelConfig\CityConfig.cs" />
+    <Compile Include="ModelConfig\CommunityConfig.cs" />
+    <Compile Include="ModelConfig\HouseAppointmentConfig.cs" />
+    <Compile Include="ModelConfig\HouseConfig.cs" />
+    <Compile Include="ModelConfig\IdNameConfig.cs" />
+    <Compile Include="ModelConfig\RBAC\PermissionConfig.cs" />
+    <Compile Include="ModelConfig\RBAC\RoleConfig.cs" />
+    <Compile Include="ModelConfig\RBAC\AdminUserConfig.cs" />
+    <Compile Include="ModelConfig\RegionConfig.cs" />
+    <Compile Include="ModelConfig\SettingConfig.cs" />
+    <Compile Include="ModelConfig\UserConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\SettingEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ModelConfig\" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

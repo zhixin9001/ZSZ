@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace ZSZ.Service.Entities
 {
-  public class CommunityEntity:BaseEntity
+  public class CommunityEntity : BaseEntity
   {
     public string Name { get; set; }
     public long RegionId { get; set; }
     public string Location { get; set; }
     public string Traffic { get; set; }
     public int BuiltYear { get; set; }
+
+    public virtual RegionEntity Region { get; set; }
   }
 }

@@ -13,6 +13,8 @@ namespace ZSZ.Service.Entities
     public string PasswordSalt { get; set; }
     public int LoginErrorTimes { get; set; }
     public DateTime LastLoginErrorDateTime { get; set; }
-    public long CityId { get; set; }
+    public long? CityId { get; set; }
+
+    public virtual CityEntity City { get; set; }
   }
 }

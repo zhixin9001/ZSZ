@@ -17,6 +17,7 @@ namespace ZSZ.Service.Entities.RBAC
     public int LoginErrorTimes { get; set; }
     public DateTime LastLoginErrorDateTime { get; set; }
 
-    public ICollection<RoleEntity> Roles { get; set; } = new List<RoleEntity>();
+    public virtual CityEntity City { get; set; }
+    public virtual ICollection<RoleEntity> Roles { get; set; } = new List<RoleEntity>();
   }
 }

@@ -9,7 +9,7 @@ namespace ZSZ.Service.Entities.RBAC
   public class RoleEntity : BaseEntity
   {
     public string Name { get; set; }
-    public ICollection<AdminUserEntity> AdminUsers { get; set; } = new List<AdminUserEntity>();
-    public ICollection<PermissionEntity> Permissions { get; set; } = new List<PermissionEntity>();
+    public virtual ICollection<AdminUserEntity> AdminUsers { get; set; } = new List<AdminUserEntity>();
+    public virtual ICollection<PermissionEntity> Permissions { get; set; } = new List<PermissionEntity>();
   }
 }
