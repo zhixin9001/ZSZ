@@ -18,6 +18,12 @@ namespace ZSZ.Service.ModelConfig.RBAC
         .Map(m=>m.ToTable("T_AdminUserRoles")
         .MapLeftKey("AdminUserId")
         .MapRightKey("RoleId"));
+
+      this.Property(e => e.Name).HasMaxLength(50).IsRequired();
+      this.Property(e => e.Email).HasMaxLength(30).IsRequired().IsUnicode(false);//varchar(30)
+      this.Property(e => e.PhoneNum).HasMaxLength(20).IsRequired().IsUnicode(false);
+      this.Property(e => e.PasswordSalt).HasMaxLength(20).IsRequired().IsUnicode(false);
+      this.Property(e => e.PasswordHash).HasMaxLength(100).IsRequired().IsUnicode(false);
     }
   }
 }

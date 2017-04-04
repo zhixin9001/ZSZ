@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZSZ.Common;
 using System.Net;
+using ZSZ.Service.Entities;
 
 namespace Tests
 {
@@ -134,9 +135,15 @@ namespace Tests
       #endregion
 
       #region UnitTest Simulate
-      AsertEqual(Add(0, 1), 1);
-      AsertEqual(Add(0, 1), 2);
+      //AsertEqual(Add(0, 1), 1);
+      //AsertEqual(Add(0, 1), 2);
       #endregion
+
+      using (ZszDBContext ctx = new ZszDBContext())
+      {
+        ctx.Database.Delete();
+        ctx.Database.Create();
+      }
       Console.WriteLine("OK");
       Console.ReadKey();
     }

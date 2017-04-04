@@ -61,6 +61,7 @@
     <Compile Include="Entities\RBAC\RoleEntity.cs" />
     <Compile Include="Entities\RegionEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="Entities\ZszDBContext.cs" />
     <Compile Include="ModelConfig\AdminLogConfig.cs" />
     <Compile Include="ModelConfig\AttachmentConfig.cs" />
     <Compile Include="ModelConfig\CityConfig.cs" />
