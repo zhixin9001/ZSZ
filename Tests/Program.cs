@@ -66,7 +66,7 @@ namespace Tests
       #endregion
 
       #region Log4Net
-      //log4net.Config.XmlConfigurator.Configure();
+      //log4net.config.xmlconfigurator.configure();
       //ILog log = LogManager.GetLogger(typeof(Program));
       //log.Error("an error has occured");
       #endregion
