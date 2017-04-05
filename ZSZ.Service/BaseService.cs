@@ -9,6 +9,36 @@ namespace ZSZ.Service
 {
   public class BaseService<T> where T : BaseEntity
   {
-    public IQueryable<T> Get
+    private ZszDBContext ctx;
+    public BaseService(ZszDBContext ctx)
+    {
+      this.ctx = ctx;
+    }
+    public IQueryable<T> GetAll()
+    {
+      return ctx.Set<T>().Where(e => e.IsDeleted == false);
+    }
+
+    public long GetTotalCount()
+    {
+      return GetAll().LongCount();
+    }
+
+    public T GetById(long id)
+    {
+      return GetAll().Where(e => e.Id == id).SingleOrDefault();
+    }
+
+    public void MarkDeleted(long id)
+    {
+      var result = GetById(id);
+      result.IsDeleted = true;
+      ctx.SaveChanges();
+    }
+
+    public IQueryable<T> GetPagedDate(int startIndex, int num)
+    {
+      return GetAll().OrderBy(e => e.CreateDateTime).Skip(startIndex).Take(num);
+    }
   }
 }
