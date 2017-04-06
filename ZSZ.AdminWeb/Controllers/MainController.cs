@@ -6,12 +6,22 @@ using System.Web.Mvc;
 
 namespace ZSZ.AdminWeb.Controllers
 {
-    public class MainController : Controller
+  public class MainController : Controller
+  {
+    // GET: Main
+    public ActionResult Index()
     {
-        // GET: Main
-        public ActionResult Index()
-        {
-            return View();
-        }
+      return View();
     }
+
+    public ActionResult Login()
+    {
+      return View();
+    }
+
+    public ActionResult Login1()
+    {
+      return View();
+    }
+  }
 }
