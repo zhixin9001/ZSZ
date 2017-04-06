@@ -103,12 +103,84 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\H-ui.admin.css" />
+    <Content Include="Content\H-ui.css" />
+    <Content Include="Content\H-ui.login.css" />
+    <Content Include="Content\H-ui.min.css" />
+    <Content Include="Content\H-ui.reset.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\acrossTab-2.png" />
+    <Content Include="Images\acrossTab-2bak.png" />
+    <Content Include="Images\acrossTab-bg.png" />
+    <Content Include="Images\acrossTab-close.png" />
+    <Content Include="Images\acrossTab.png" />
+    <Content Include="Images\admin-login-bg.jpg" />
+    <Content Include="Images\admin-loginform-bg.png" />
+    <Content Include="Images\gq\cn.gif" />
+    <Content Include="Images\gq\gj.png" />
+    <Content Include="Images\gq\us.gif" />
+    <Content Include="Images\hamburger-retina.gif" />
+    <Content Include="Images\hamburger.gif" />
+    <Content Include="Images\icon-add.png" />
+    <Content Include="Images\icon_error_s.png" />
+    <Content Include="Images\icon_jt2.png" />
+    <Content Include="Images\icon_right_s.png" />
+    <Content Include="Images\icon_warning_s.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\loading_072.gif" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\totop.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Images\gq\Thumbs.db" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\de_DE.txt" />
+    <Content Include="Scripts\H-ui.admin.js" />
+    <Content Include="Scripts\H-ui.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Skin\blue\acrossTab-bg.png" />
+    <Content Include="Skin\blue\acrossTab.png" />
+    <Content Include="Skin\blue\icon_arrow.png" />
+    <Content Include="Skin\blue\skin.css" />
+    <Content Include="Skin\default\acrossTab-bg.png" />
+    <Content Include="Skin\default\acrossTab.png" />
+    <Content Include="Skin\default\icon_arrow.png" />
+    <Content Include="Skin\default\skin.css" />
+    <Content Include="Skin\green\acrossTab-bg.png" />
+    <Content Include="Skin\green\acrossTab.png" />
+    <Content Include="Skin\green\icon_arrow.png" />
+    <Content Include="Skin\green\skin.css" />
+    <Content Include="Skin\orange\acrossTab-bg.png" />
+    <Content Include="Skin\orange\acrossTab.png" />
+    <Content Include="Skin\orange\icon_arrow.png" />
+    <Content Include="Skin\orange\skin.css" />
+    <Content Include="Skin\red\acrossTab-bg.png" />
+    <Content Include="Skin\red\acrossTab.png" />
+    <Content Include="Skin\red\icon_arrow.png" />
+    <Content Include="Skin\red\skin.css" />
+    <Content Include="Skin\yellow\acrossTab-bg.png" />
+    <Content Include="Skin\yellow\acrossTab.png" />
+    <Content Include="Skin\yellow\icon_arrow.png" />
+    <Content Include="Skin\yellow\skin.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ExceptionFilter.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -117,6 +189,19 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Skin\blue\Thumbs.db" />
+    <Content Include="Skin\default\Thumbs.db" />
+    <Content Include="Skin\green\Thumbs.db" />
+    <Content Include="Skin\orange\Thumbs.db" />
+    <Content Include="Skin\red\Thumbs.db" />
+    <Content Include="Skin\yellow\Thumbs.db" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -126,7 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
