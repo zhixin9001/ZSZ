@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using ZSZ.Common;
 using ZSZ.FrontWeb.App_Start;
+using ZSZ.IService;
 
 namespace ZSZ.FrontWeb
 {
@@ -21,6 +25,30 @@ namespace ZSZ.FrontWeb
       GlobalFilters.Filters.Add(new ExceptionFilter());
       AreaRegistration.RegisterAllAreas();
       RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+      #region Autofac
+
+      var builder = new ContainerBuilder();
+      //Register all cotrollers in this assembly
+      builder.RegisterControllers(typeof(MvcApplication).Assembly)
+        .PropertiesAutowired();  // the properties will be resilved automatically
+                                 //Get all the relative assamblies
+                                 //Assembly asm = Assembly.Load("TestService");
+      Assembly[] asms = new Assembly[] { Assembly.Load("ZSZ.Service") };
+      builder.RegisterAssemblyTypes(asms)
+        .Where(t => !t.IsAbstract
+          && typeof(IServiceSupport).IsAssignableFrom(t)
+        )
+        .AsImplementedInterfaces()
+        .PropertiesAutowired();
+
+      //type1.IsAssignableFrom(type2)  type1类型的变量，是否可以指向type2类型的对象
+      //type2 是否实现了type1接口
+      var container = builder.Build();
+      //set this container was the default resolver, mvc system will get object from this container too
+      DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+      #endregion
     }
   }
 }

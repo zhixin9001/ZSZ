@@ -139,11 +139,11 @@ namespace Tests
       //AsertEqual(Add(0, 1), 2);
       #endregion
 
-      using (ZszDBContext ctx = new ZszDBContext())
-      {
-        ctx.Database.Delete();
-        ctx.Database.Create();
-      }
+      //using (ZszDBContext ctx = new ZszDBContext())
+      //{
+      //  ctx.Database.Delete();
+      //  ctx.Database.Create();
+      //}
       Console.WriteLine("OK");
       Console.ReadKey();
     }

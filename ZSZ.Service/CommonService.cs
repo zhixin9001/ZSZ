@@ -7,10 +7,10 @@ using ZSZ.Service.Entities;
 
 namespace ZSZ.Service
 {
-  public class BaseService<T> where T : BaseEntity
+  public class CommonService<T> where T : BaseEntity
   {
     private ZszDBContext ctx;
-    public BaseService(ZszDBContext ctx)
+    public CommonService(ZszDBContext ctx)
     {
       this.ctx = ctx;
     }
