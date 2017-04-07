@@ -29,12 +29,12 @@ function getskincookie(){
 	if(v==null||v==""){
 		v="default";
 	}
-	$("#skin").attr("href","skin/"+v+"/skin.css");
+	$("#skin").attr("href","/skin/"+v+"/skin.css");
 }
 $(function(){
 	getskincookie();
 	//layer.config({extend: 'extend/layer.ext.js'});
-	Huiasidedisplay();
+	Huiasidedisplay();x
 	var resizeID;
 	$(window).resize(function(){
 		clearTimeout(resizeID);
