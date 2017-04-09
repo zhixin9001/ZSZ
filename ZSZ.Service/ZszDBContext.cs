@@ -6,8 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ZSZ.Service.Entities;
 using ZSZ.Service.Entities.RBAC;
-namespace ZSZ.Service.Entities
+namespace ZSZ.Service
 {
   public class ZszDBContext : DbContext
   {

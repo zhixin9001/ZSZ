@@ -7,9 +7,9 @@ using ZSZ.DTO;
 
 namespace ZSZ.IService
 {
-  public interface ICityService : IServiceSupport
+  public interface IAttachmentService : IServiceSupport
   {
-    CityDTO GetById(long id);
-    CityDTO[] GetAll();
+    AttachmentDTO[] GetAll();
+    AttachmentDTO[] GetAttachments(long houseId);
   }
 }

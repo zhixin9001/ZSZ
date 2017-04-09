@@ -7,9 +7,8 @@ using ZSZ.DTO;
 
 namespace ZSZ.IService
 {
-  public interface ICityService : IServiceSupport
+  public interface ICommunityService : IServiceSupport
   {
-    CityDTO GetById(long id);
-    CityDTO[] GetAll();
+    CommunityDTO[] GetByRegionId(long regionId);
   }
 }
