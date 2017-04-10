@@ -15,7 +15,7 @@ namespace ZSZ.Service.Entities.RBAC
     public string Email { get; set; }
     public long? CityId { get; set; }
     public int LoginErrorTimes { get; set; }
-    public DateTime LastLoginErrorDateTime { get; set; }
+    public DateTime? LastLoginErrorDateTime { get; set; }
 
     public virtual CityEntity City { get; set; }
     public virtual ICollection<RoleEntity> Roles { get; set; } = new List<RoleEntity>();
