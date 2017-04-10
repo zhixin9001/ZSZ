@@ -8,7 +8,7 @@ using ZSZ.IService;
 using ZSZ.Service.Entities;
 using System.Data.Entity;
 
-namespace ZSZ.Service
+namespace ZSZ.Service.Services
 {
   public class IdNameService : IIdNameService
   {

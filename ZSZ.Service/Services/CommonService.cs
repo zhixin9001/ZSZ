@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZSZ.Service.Entities;
 
-namespace ZSZ.Service
+namespace ZSZ.Service.Services
 {
   public class CommonService<T> where T : BaseEntity
   {

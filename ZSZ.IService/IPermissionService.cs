@@ -17,6 +17,8 @@ namespace ZSZ.IService
 
     PermissionDTO[] GetByRoldId(long roleId);
 
+    long AddPermission(string permName, string description);
+
     void AddPermIds(long roleId, long[] permIds);
 
     void UpdatePermIds(long roleId, long[] permIds);

@@ -18,5 +18,7 @@ namespace ZSZ.IService
     bool CheckLogin(string phoneNum, string password);
 
     void SetUserCityId(long userId, long cityId);
+
+    void UpdatePwd(long userId,string newPassword);
   }
 }
