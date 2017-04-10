@@ -38,6 +38,8 @@ namespace ZSZ.Service.Services
 
     private AttachmentDTO ToDTO(AttachmentEntity a)
     {
+      if (a == null) return null;
+
       var dto = new AttachmentDTO()
       {
         Id = a.Id,

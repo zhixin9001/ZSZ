@@ -29,7 +29,7 @@ namespace ZSZ.IService
 
     HouseSearchResult Search(HouseSearchOptions options);
 
-    int GetCount(long cityId, DateTime startDateTime, DateTime endDateTime);
+    long GetCount(long cityId, DateTime startDateTime, DateTime endDateTime);
   }
 
   public class HouseSearchOptions

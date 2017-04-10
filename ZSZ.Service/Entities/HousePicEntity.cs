@@ -8,8 +8,8 @@ namespace ZSZ.Service.Entities
 {
   public class HousePicEntity : BaseEntity
   {
-    public int HouseId { get; set; }
-    public string Uri { get; set; }
+    public long HouseId { get; set; }
+    public string Url { get; set; }
     public string ThumbUri { get; set; }
   }
 }

@@ -50,7 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CityService.cs" />
+    <Compile Include="HouseService.cs" />
+    <Compile Include="IdNameService.cs" />
+    <Compile Include="PermissionService.cs" />
+    <Compile Include="Services\CityService.cs" />
     <Compile Include="CommonService.cs" />
     <Compile Include="Entities\AdminLogEntity.cs" />
     <Compile Include="Entities\AttachmentEntity.cs" />
@@ -68,6 +71,8 @@
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Services\AdminUserService.cs" />
     <Compile Include="Services\AttachmentService.cs" />
+    <Compile Include="Services\CommunityService.cs" />
+    <Compile Include="Services\HouseAppointmentService.cs" />
     <Compile Include="ZszDBContext.cs" />
     <Compile Include="ModelConfig\AdminLogConfig.cs" />
     <Compile Include="ModelConfig\AttachmentConfig.cs" />
