@@ -21,7 +21,7 @@ namespace ZSZ.Service.Services
     public SettingDTO[] GetAll()
     {
       var cs = new CommonService<SettingEntity>(_ctx);
-      return cs.GetAll().Select(s => ToDTO(s)).ToArray();
+      return cs.GetAll().ToList().Select(s => ToDTO(s)).ToArray();
     }
 
 

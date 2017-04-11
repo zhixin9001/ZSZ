@@ -8,7 +8,7 @@ using ZSZ.Service;
 namespace ZSZ.ServiceTest
 {
   [TestClass]
-  public class UnitTestAdminLog
+  public class TestAdminLog
   {
     private ZszDBContext _ctx = new ZszDBContext();
     [TestMethod]

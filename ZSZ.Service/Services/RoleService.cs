@@ -64,7 +64,7 @@ namespace ZSZ.Service.Services
     public RoleDTO[] GetAll()
     {
       var cs = new CommonService<RoleEntity>(_ctx);
-      return cs.GetAll().Select(r => ToDTO(r)).ToArray();
+      return cs.GetAll().ToList().Select(r => ToDTO(r)).ToArray();
     }
 
     public RoleDTO[] GetByAdminUserId(long admin)
@@ -76,7 +76,7 @@ namespace ZSZ.Service.Services
         throw new ArgumentException("The Admin doesn't exist, AdminId:" + admin);
       }
 
-      return adminEntity.Roles.Select(r => ToDTO(r)).ToArray();
+      return adminEntity.Roles.ToList().Select(r => ToDTO(r)).ToArray();
     }
 
     public RoleDTO GetById(long id)

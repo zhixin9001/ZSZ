@@ -17,7 +17,7 @@ namespace ZSZ.Service.Services
       using (var ctx = new ZszDBContext())
       {
         var cs = new CommonService<CommunityEntity>(ctx);
-        return cs.GetAll().AsNoTracking().Select(c => ToDTO(c)).ToArray();
+        return cs.GetAll().AsNoTracking().ToList().Select(c => ToDTO(c)).ToArray();
       }
     }
 

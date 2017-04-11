@@ -123,6 +123,8 @@ namespace ZSZ.Service.Services
       }
     }
 
+
+
     public bool HasPermission(long adminUserId, string permissionName)
     {
       using (var ctx = new ZszDBContext())

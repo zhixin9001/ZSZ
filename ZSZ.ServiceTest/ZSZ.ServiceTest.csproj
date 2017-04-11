@@ -53,11 +53,12 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTestAdminLog.cs" />
+    <Compile Include="TestAdminLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AdminUserServiceTest.cs" />
+    <Compile Include="TestAdminUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

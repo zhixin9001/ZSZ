@@ -68,7 +68,7 @@ namespace ZSZ.Service.Services
       using (var ctx = new ZszDBContext())
       {
         var cs = new CommonService<PermissionEntity>(ctx);
-        return cs.GetAll().Select(p => ToDTO(p)).ToArray();
+        return cs.GetAll().ToList().Select(p => ToDTO(p)).ToArray();
       }
     }
 
@@ -101,7 +101,7 @@ namespace ZSZ.Service.Services
           throw new ArgumentException("The roleid doesn't exist, roleid:" + roleId);
         }
 
-        return role.Permissions.Select(p => ToDTO(p)).ToArray();
+        return role.Permissions.ToList().Select(p => ToDTO(p)).ToArray();
       }
     }
 

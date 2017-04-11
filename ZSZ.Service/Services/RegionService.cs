@@ -18,7 +18,7 @@ namespace ZSZ.Service.Services
     {
       var cs = new CommonService<RegionEntity>(_ctx);
       return cs.GetAll().Include(r => r.City).AsNoTracking()
-        .Where(r => r.CItyId == cityId).Select(r => ToDTO(r)).ToArray();
+        .Where(r => r.CItyId == cityId).ToList().Select(r => ToDTO(r)).ToArray();
     }
 
     public RegionDTO GetById(long id)
