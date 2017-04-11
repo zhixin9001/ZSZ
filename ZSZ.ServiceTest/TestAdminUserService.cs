@@ -65,7 +65,8 @@ namespace ZSZ.ServiceTest
     {
       //case: Update the existed and not deleted admin user
       auService.UpdateAdminUser(1, "abc1", "111111", "1234", "ss", null);
-      //case: Check 
+      //case: Check update result
+      var auDTO = auService.GetById(1);
       //case: Try to login with old authorization
       //case: Try to login with new authorization
       //case: Update the deleted admin user
