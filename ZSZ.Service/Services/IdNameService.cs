@@ -23,7 +23,7 @@ namespace ZSZ.Service.Services
         };
 
         ctx.IdNames.Add(entity);
-
+        ctx.SaveChanges();
         return entity.Id;
       }
     }

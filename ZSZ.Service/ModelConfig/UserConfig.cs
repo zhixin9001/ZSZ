@@ -17,6 +17,7 @@ namespace ZSZ.Service.ModelConfig
       this.Property(p => p.PasswordHash).IsRequired().HasMaxLength(100);
       this.Property(p => p.PasswordSalt).IsRequired().HasMaxLength(20);
       this.Property(p => p.PhoneNum).IsRequired().HasMaxLength(20).IsUnicode(false);
+      
     }
   }
 }

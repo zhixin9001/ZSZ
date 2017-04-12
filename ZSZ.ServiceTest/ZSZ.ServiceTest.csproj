@@ -63,6 +63,8 @@
     <Compile Include="TestCityService.cs" />
     <Compile Include="TestCommunityService.cs" />
     <Compile Include="TestHouseAppointmentService.cs" />
+    <Compile Include="TestIdNameService.cs" />
+    <Compile Include="TestPermissionService.cs" />
     <Compile Include="TestUserService.cs" />
   </ItemGroup>
   <ItemGroup>

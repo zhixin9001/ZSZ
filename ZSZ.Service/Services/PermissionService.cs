@@ -28,7 +28,7 @@ namespace ZSZ.Service.Services
         var isExist = permissions.Any(p => permIds.Contains(p.Id));
         if (isExist)
         {
-          throw new ArgumentException(string.Format("The role {0} already has the permissions,permIds {1}", roleId, permIds.ToString()));
+          throw new ArgumentException(string.Format("The role {0} already has the permissions,permIds {1}", roleId, string.Join(",", permIds)));
         }
         var csPerm = new CommonService<PermissionEntity>(ctx);
         var addedPerms = csPerm.GetAll().Where(p => permIds.Contains(p.Id));
@@ -42,6 +42,10 @@ namespace ZSZ.Service.Services
 
     public long AddPermission(string permName, string description)
     {
+      if (string.IsNullOrEmpty(permName))
+      {
+        throw new ArgumentException("The Permission shouldn't be empty or null");
+      }
       using (var ctx = new ZszDBContext())
       {
         var cs = new CommonService<PermissionEntity>(ctx);
@@ -115,13 +119,23 @@ namespace ZSZ.Service.Services
         {
           throw new ArgumentException("The roleid doesn't exist, roleid:" + roleId);
         }
-
-        role.Permissions.Clear();
-        var csPerm = new CommonService<PermissionEntity>(ctx);
-        var updatedPerms = csPerm.GetAll().Where(p => permIds.Contains(p.Id));
-        foreach (var item in updatedPerms)
+        if (permIds.Count() > 0)
         {
-          role.Permissions.Add(item);
+          var csPerm = new CommonService<PermissionEntity>(ctx);
+          var updatedPerms = csPerm.GetAll().Where(p => permIds.Contains(p.Id));
+          if (updatedPerms == null || updatedPerms.Count() <= 0)
+          {
+            throw new ArgumentException("There are no permissions to be updated");
+          }
+          role.Permissions.Clear();
+          foreach (var item in updatedPerms)
+          {
+            role.Permissions.Add(item);
+          }
+        }
+        else
+        {
+          role.Permissions.Clear();
         }
         ctx.SaveChanges();
       }
