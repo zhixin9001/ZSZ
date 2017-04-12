@@ -61,6 +61,9 @@
     <Compile Include="TestAdminUserService.cs" />
     <Compile Include="TestAttachmentService.cs" />
     <Compile Include="TestCityService.cs" />
+    <Compile Include="TestCommunityService.cs" />
+    <Compile Include="TestHouseAppointmentService.cs" />
+    <Compile Include="TestUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

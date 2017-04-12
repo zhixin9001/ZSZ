@@ -28,7 +28,10 @@ namespace ZSZ.Service.Services
       {
         throw new ArgumentException("The PhoneNum has already existed:" + phoneNum);
       }
-
+      if (string.IsNullOrEmpty(password) || password.Length < 6)
+      {
+        throw new ArgumentException("The password length must be more than 6");
+      }
       var entity = new UserEntity()
       {
         PhoneNum = phoneNum,
