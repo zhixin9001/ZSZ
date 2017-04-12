@@ -6,8 +6,6 @@ using log4net;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
-using MyBLLImpl;
-using MyIBLL;
 using System;
 using System.Collections.Generic;
 using System.IO;

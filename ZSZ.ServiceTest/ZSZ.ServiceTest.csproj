@@ -59,6 +59,7 @@
     <Compile Include="TestAdminLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestAdminUserService.cs" />
+    <Compile Include="TestAttachmentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

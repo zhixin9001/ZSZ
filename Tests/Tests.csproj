@@ -111,14 +111,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyBLLImpl\MyBLLImpl.csproj">
-      <Project>{947697F3-73DD-4A1F-8429-25BDB661F181}</Project>
-      <Name>MyBLLImpl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyIBLL\MyIBLL.csproj">
-      <Project>{b1dd83d6-02ea-439a-a1f6-37818fd50999}</Project>
-      <Name>MyIBLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ZSZ.Common\ZSZ.Common.csproj">
       <Project>{241553fa-c16b-4958-806f-fcba7fb62a16}</Project>
       <Name>ZSZ.Common</Name>

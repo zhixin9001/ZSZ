@@ -47,17 +47,22 @@ namespace ZSZ.Service.Services
         {
           var newPwdHash = CommonHelper.CalcMD5(entity.PasswordSalt + password.Trim());
           isValid = newPwdHash == entity.PasswordHash;
-        }
-
-        if (isValid)
-        {
-          entity.LoginErrorTimes = 0;
+          if (isValid)
+          {
+            entity.LoginErrorTimes = 0;
+          }
+          else
+          {
+            entity.LoginErrorTimes++;
+            entity.LastLoginErrorDateTime = DateTime.Now;
+          }
         }
         else
         {
-          entity.LoginErrorTimes++;
-          entity.LastLoginErrorDateTime = DateTime.Now;
+          isValid = false;
         }
+
+        
         ctx.SaveChanges();
 
         return isValid;
@@ -116,6 +121,10 @@ namespace ZSZ.Service.Services
         {
           return ToDTO(users.Single());
         }
+        else if (users.Count() == 0)
+        {
+          return null;
+        }
         else
         {
           throw new ApplicationException(string.Format("The phonenum {0} belongs to more than one admin"));
@@ -166,6 +175,11 @@ namespace ZSZ.Service.Services
       {
         var cs = new CommonService<AdminUserEntity>(ctx);
         var user = cs.GetById(id);
+        if (user == null)
+        {
+          throw new ArgumentException("Can not find the Admin: Id:"+id);
+        }
+
         user.Name = name;
         user.PhoneNum = phonenum;
         user.PasswordHash = CommonHelper.CalcMD5(user.PasswordSalt + password);
@@ -181,6 +195,7 @@ namespace ZSZ.Service.Services
 
       var dto = new AdminUserDTO()
       {
+        Id=entity.Id,
         Name = entity.Name,
         PhoneNum = entity.PhoneNum,
         Email = entity.Email,
