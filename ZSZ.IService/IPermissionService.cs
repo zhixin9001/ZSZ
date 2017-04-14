@@ -13,6 +13,10 @@ namespace ZSZ.IService
 
     PermissionDTO[] GetAll();
 
+    void UpdatePermission(long id, string permName, string description);
+
+    void MarkDeleted(long id);
+
     PermissionDTO GetByName(string name);
 
     PermissionDTO[] GetByRoldId(long roleId);

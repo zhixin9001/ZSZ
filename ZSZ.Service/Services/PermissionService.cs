@@ -72,7 +72,7 @@ namespace ZSZ.Service.Services
       using (var ctx = new ZszDBContext())
       {
         var cs = new CommonService<PermissionEntity>(ctx);
-        return cs.GetAll().ToList().Select(p => ToDTO(p)).ToArray();
+        return cs.GetAll().OrderByDescending(p => p.CreateDateTime).ToList().Select(p => ToDTO(p)).ToArray();
       }
     }
 
@@ -109,6 +109,21 @@ namespace ZSZ.Service.Services
       }
     }
 
+    public void MarkDeleted(long id)
+    {
+      using (var ctx = new ZszDBContext())
+      {
+        var cs = new CommonService<PermissionEntity>(ctx);
+        var perm = cs.GetById(id);
+        if (perm == null)
+        {
+          throw new ArgumentException("Id doesn't exist, Id: " + id);
+        }
+        cs.MarkDeleted(id);
+        ctx.SaveChanges();
+      }
+    }
+
     public void UpdatePermIds(long roleId, long[] permIds)
     {
       using (var ctx = new ZszDBContext())
@@ -137,6 +152,22 @@ namespace ZSZ.Service.Services
         {
           role.Permissions.Clear();
         }
+        ctx.SaveChanges();
+      }
+    }
+
+    public void UpdatePermission(long id, string permName, string description)
+    {
+      using (var ctx = new ZszDBContext())
+      {
+        var cs = new CommonService<PermissionEntity>(ctx);
+        var perm = cs.GetById(id);
+        if (perm == null)
+        {
+          throw new ArgumentException("Id doesn't exist, Id: " + id);
+        }
+        perm.Name = permName;
+        perm.Description = description;
         ctx.SaveChanges();
       }
     }

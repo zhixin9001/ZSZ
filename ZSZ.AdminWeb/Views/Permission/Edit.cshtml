@@ -1,0 +1,39 @@
+﻿@model ZSZ.DTO.PermissionDTO
+
+@{
+  ViewBag.Title = "Edit";
+}
+
+<form id="formEdit">
+  <input type="hidden" name="id" value="@Model.Id" />
+  Name:<input type="text" name="Name" value="@Model.Name" />
+  Description:<input type="text" name="Description" value="@Model.Description"/>
+  <input id="btnSave" type="button" value="Save" />
+</form>
+
+@section FooterScript
+{
+  <script type="text/javascript">
+    $(function () {
+      $('#btnSave').click(saveAjax);
+    });
+    var saveAjax = function () {
+      var formData = $('#formEdit').serializeArray();
+      $.ajax({
+        type: 'post',
+        url: '/Permission/Edit',
+        data: formData,
+        success: function (res) {
+          if (res.status == 'ok') {
+            parent.location.reload();
+          } else {
+            alert("ajax error1");
+          }
+        },
+        error: function () {
+          alert('ajax error2');
+        }
+      });
+    };
+  </script>
+}

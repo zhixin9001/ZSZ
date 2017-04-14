@@ -64,7 +64,7 @@ namespace ZSZ.Service.Services
     public RoleDTO[] GetAll()
     {
       var cs = new CommonService<RoleEntity>(_ctx);
-      return cs.GetAll().ToList().Select(r => ToDTO(r)).ToArray();
+      return cs.GetAll().OrderByDescending(r => r.CreateDateTime).ToList().Select(r => ToDTO(r)).ToArray();
     }
 
     public RoleDTO[] GetByAdminUserId(long admin)
@@ -103,7 +103,7 @@ namespace ZSZ.Service.Services
       var role = cs.GetById(roleId);
       if (role == null)
       {
-        throw new ArgumentException("The role wished to be updated doesn't exist, roleId:"+roleId);
+        throw new ArgumentException("The role wished to be updated doesn't exist, roleId:" + roleId);
       }
       role.Name = roleName;
 
@@ -113,10 +113,10 @@ namespace ZSZ.Service.Services
     public void UpdateRoleIds(long adminUserId, long[] roleIds)
     {
       var csAdmin = new CommonService<AdminUserEntity>(_ctx);
-      var adminUser = csAdmin.GetAll().Include(a => a.Roles).SingleOrDefault(a=>a.Id==adminUserId);
+      var adminUser = csAdmin.GetAll().Include(a => a.Roles).SingleOrDefault(a => a.Id == adminUserId);
       if (adminUser == null)
       {
-        throw new ArgumentException("The admin wished to be updated doesn't exist, adminUserId: "+adminUserId);
+        throw new ArgumentException("The admin wished to be updated doesn't exist, adminUserId: " + adminUserId);
       }
       adminUser.Roles.Clear();
       var csRole = new CommonService<RoleEntity>(_ctx);
@@ -125,7 +125,7 @@ namespace ZSZ.Service.Services
         var role = csRole.GetById(roleId);
         if (role == null)
         {
-          throw new ArgumentException("The rold doesn't exist, roleId:" +roleId);
+          throw new ArgumentException("The rold doesn't exist, roleId:" + roleId);
         }
         adminUser.Roles.Add(role);
       }

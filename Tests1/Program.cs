@@ -35,7 +35,7 @@ namespace Tests1
 
       #endregion
 
-      Nullable<int> e = 1;
+      //Nullable<int> e = 1;
 
       int? s1 = 9;
       int s2 = 0;
@@ -43,7 +43,7 @@ namespace Tests1
       s1 = s2;
       s2 = (int)s1;
 
-      string s = null;
+      //string s = null;
 
       //Console.WriteLine(s);
       Console.ReadKey();

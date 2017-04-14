@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using ZSZ.AdminWeb.App_Start;
 using ZSZ.Common;
+using ZSZ.CommonMVC;
 using ZSZ.IService;
 
 namespace ZSZ.AdminWeb
@@ -25,6 +26,9 @@ namespace ZSZ.AdminWeb
       GlobalFilters.Filters.Add(new ExceptionFilter());
       AreaRegistration.RegisterAllAreas();
       RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+      GlobalFilters.Filters.Add(new JsonNetActionFilter());
+
       #region Autofac
 
       var builder = new ContainerBuilder();

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using ZSZ.Common;
+using ZSZ.CommonMVC;
 using ZSZ.FrontWeb.App_Start;
 using ZSZ.IService;
 
@@ -25,6 +26,8 @@ namespace ZSZ.FrontWeb
       GlobalFilters.Filters.Add(new ExceptionFilter());
       AreaRegistration.RegisterAllAreas();
       RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+      GlobalFilters.Filters.Add(new JsonNetActionFilter());
 
       #region Autofac
 

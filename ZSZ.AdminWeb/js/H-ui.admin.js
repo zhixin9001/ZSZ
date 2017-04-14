@@ -34,7 +34,7 @@ function getskincookie(){
 $(function(){
 	getskincookie();
 	//layer.config({extend: 'extend/layer.ext.js'});
-	Huiasidedisplay();x
+	Huiasidedisplay();
 	var resizeID;
 	$(window).resize(function(){
 		clearTimeout(resizeID);

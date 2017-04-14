@@ -1,0 +1,39 @@
+﻿@model ZSZ.AdminWeb.Models.PermissionAddNewModel
+
+@{
+  ViewBag.Title = "Add";
+}
+
+<form id="formAdd">
+  Name:<input type="text" name="Name" />
+  Description:<input type="text" name="Description" />
+  <input id="btnSave" type="button" value="Save" />
+</form>
+
+@section FooterScript
+{
+  <script type="text/javascript">
+    $(function () {
+      $('#btnSave').click(saveAjax);
+    });
+    var saveAjax = function () {
+      var formData = $('#formAdd').serializeArray();
+      $.ajax({
+        type: 'post',
+        url: '/Permission/Add',
+        data: formData,
+        success: function (res) {
+          if (res.status == 'ok') {
+            parent.location.reload();
+          } else {
+            alert("ajax error1");
+          }
+        },
+        error: function () { alert('ajax error2') }
+
+      });
+    };
+  </script>
+}
+
+
