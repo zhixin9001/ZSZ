@@ -11,6 +11,6 @@ namespace ZSZ.Service.Entities
     public long Id { get; set; }
     public bool IsDeleted { get; set; } = false;
     public DateTime CreateDateTime { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day
-      , DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            , DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
   }
 }

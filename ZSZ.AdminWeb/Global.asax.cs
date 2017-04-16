@@ -34,7 +34,7 @@ namespace ZSZ.AdminWeb
       var builder = new ContainerBuilder();
       //Register all cotrollers in this assembly
       builder.RegisterControllers(typeof(MvcApplication).Assembly)
-        .PropertiesAutowired();  // the properties will be resilved automatically
+        .PropertiesAutowired();  // the properties will be resolved automatically
                                  //Get all the relative assamblies
                                  //Assembly asm = Assembly.Load("TestService");
       Assembly[] asms = new Assembly[] { Assembly.Load("ZSZ.Service") };

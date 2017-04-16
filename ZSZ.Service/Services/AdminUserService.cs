@@ -182,7 +182,10 @@ namespace ZSZ.Service.Services
 
         user.Name = name;
         user.PhoneNum = phonenum;
-        user.PasswordHash = CommonHelper.CalcMD5(user.PasswordSalt + password);
+        if (!string.IsNullOrEmpty(password))
+        {
+          user.PasswordHash = CommonHelper.CalcMD5(user.PasswordSalt + password);
+        }        
         user.Email = email;
         user.CityId = cityId;
         ctx.SaveChanges();

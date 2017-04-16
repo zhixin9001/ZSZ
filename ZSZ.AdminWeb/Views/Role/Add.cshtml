@@ -1,12 +1,12 @@
 ﻿@model ZSZ.DTO.PermissionDTO[]
 @{
-    ViewBag.Title = "Add";
+  ViewBag.Title = "Add";
 }
 
 <form id="formAdd">
   <input type="hidden" name="age" value="3" />
   <div class="row cl">
-    <label class="form-label col-3"><span class="c-red">*</span>管理员：</label>
+    <label class="form-label col-3"><span class="c-red">*</span>角色：</label>
     <div class="formControls col-5">
       <input type="text" class="input-text" name="name" id="name" datatype="*1-50" nullmsg="角色名称不能为空" />
     </div>
@@ -27,36 +27,33 @@
 @section FooterScript
 {
   <script type="text/javascript">
-        var saveAjax = function () {
-            var formData = $("#formAdd").serializeArray();
-            $.ajax({
-                url: "/Role/Add",
-                type: "post",
-                data:formData,
-                dataType: "json",
-                success: function (res) {
-                    if(res.status=="ok")
-                    {
-                        parent.location.reload();//刷新父窗口
-                    }
-                    else
-                    {
-                        alert("error");
-                    }
-                },
-                error: function () { alert("请求出错"); }
-            });
-        };
-        $(function () {
-            var validForm = $("#formAdd").Validform({tiptype:3});
-            $("#btnSave").click(function () {
-                if (validForm.check(false))
-                {
-                    saveAjax();
-                }
-            });
+    $(function () {
+      var validForm = $("#formAdd").Validform({ tiptype: 3 });
+      $("#btnSave").click(function () {
+        if (validForm.check(false)) {
+          saveAjax();
+        }
+      });
+    });
 
-        });
+    var saveAjax = function () {
+      var formData = $("#formAdd").serializeArray();
+      $.ajax({
+        url: "/Role/Add",
+        type: "post",
+        data: formData,
+        dataType: "json",
+        success: function (res) {
+          if (res.status == "ok") {
+            parent.location.reload();//刷新父窗口
+          }
+          else {
+            alert("error");
+          }
+        },
+        error: function () { alert("请求出错"); }
+      });
+    };
   </script>
 }
 

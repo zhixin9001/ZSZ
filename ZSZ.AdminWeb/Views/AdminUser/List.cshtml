@@ -1,20 +1,18 @@
-﻿@model ZSZ.DTO.RoleDTO[]
+﻿@model ZSZ.DTO.AdminUserDTO[]
 @{
-  ViewBag.Title = "List";
+  ViewBag.Title = "Admin List";  
 }
 
-
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 角色管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-
   <div class="cl pd-5 bg-1 bk-gray mt-20">
     <span class="l">
       <a href="javascript:;" onclick="batch_del()" class="btn btn-danger radius">
         <i class="Hui-iconfont">&#xe6e2;</i> 批量删除
       </a>
-      <a href="javascript:;" onclick="role_add('添加权限项','../Role/Add','600','500')"
+      <a href="javascript:;" onclick="add('添加管理员','../AdminUser/Add','600','500')"
          class="btn btn-primary radius">
-        <i class="Hui-iconfont">&#xe600;</i> 添加角色
+        <i class="Hui-iconfont">&#xe600;</i> 添加管理员
       </a>
     </span>
     <span class="r">共有数据：<strong>@Model.Length</strong> 条</span>
@@ -23,23 +21,27 @@
     <table class="table table-border table-bordered table-bg">
       <thead>
         <tr>
-          <th scope="col" colspan="9">管理角色列表</th>
+          <th scope="col" colspan="9">管理员列表</th>
         </tr>
         <tr class="text-c">
           <th width="25"><input type="checkbox" name="" value=""></th>
-          <th width="150">名称</th>
-          <th width="90">操作</th>
+          <th width="150">姓名</th>
+          <th width="150">城市</th>
+          <th width="150">手机号</th>
+          <th width="150">操作</th>
         </tr>
       </thead>
       <tbody>
-        @foreach (var role in Model)
-      {
+        @foreach (var user in Model)
+        {
           <tr class="text-c">
-            <td><input type="checkbox" value="@role.Id. name="selectedIds"></td>
-            <td>@role.Name</td>
+            <td><input type="checkbox" value="@user.Id. name="selectedIds"></td>
+            <td>@user.Name</td>
+            <td>@user.CityName</td>
+            <td>@user.PhoneNum</td>
             <td class="td-manage">
-              <a title="编辑" href="javascript:;" onclick="layer_show('权限项编辑', '/Role/Edit/@role.Id',  '600', '500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-              <a title="删除" href="javascript:;" onclick="role_del(this,@role.Id)" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+              <a title="编辑" href="javascript:;" onclick="layer_show('角色编辑', '/AdminUser/Edit/@user.Id',  '600', '500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+              <a title="删除" href="javascript:;" onclick="del(this,@user.Id)" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
               @*这种方式可能因预加载而带来误会 <a title="删除" href="~/Role/GetDelete/@role.Id" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>*@
             </td>
           </tr>
@@ -58,22 +60,23 @@
     h		弹出层高度（缺省调默认值）
   */
   /*增加*/
-  function role_add(title, url, w, h) {
+  function add(title, url, w, h) {
     layer_show(title, url, w, h);
   }
   /*删除*/
-  function role_del(obj, id) {
+  function del(obj, id) {
     layer.confirm('确认要删除吗？', function (index) {
       //此处请求后台程序，下方是成功后的前台处理……
 
       $.ajax({
-        url: "/Role/Delete",
+        url: "/AdminUser/Delete",
         data: { id: id },
         type: "post",
         success: function (data) {
-          if (data.status == 'ok') {
+          if (data.status == 'OK') {
             $(obj).parents("tr").remove();
             layer.msg('已删除!', { icon: 1, time: 2000 });
+            location.reload();
           } else {
             layer.msg('删除失败!', { icon: 2, time: 2000 });
           }
@@ -91,7 +94,7 @@
         data: formData,
         dataType: "json",
         success: function (res) {
-          if (res.status == "ok") {
+          if (res.status == "OK") {
             location.reload();//刷新页面
           }
           else {
@@ -105,4 +108,5 @@
     });
   }
 </script>
+
 

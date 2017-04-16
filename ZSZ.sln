@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSZ.Common", "ZSZ.Common\ZSZ.Common.csproj", "{241553FA-C16B-4958-806F-FCBA7FB62A16}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{2620DF85-F157-4E39-BEB3-7DB4A03B8953}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{520815A3-45FC-4FB5-8044-A7220CCC8D99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSZ.Service", "ZSZ.Service\ZSZ.Service.csproj", "{E650B6AF-3419-4510-AD2C-3668EC83B7D6}"
 EndProject

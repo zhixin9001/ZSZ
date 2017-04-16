@@ -49,6 +49,9 @@
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Mvc5.4.0.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="CaptchaGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaGen.1.0.0\lib\net40\CaptchaGen.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -160,6 +163,24 @@
     <Content Include="js\jquery-1.10.2.js" />
     <Content Include="js\jquery-1.10.2.min.js" />
     <Content Include="js\modernizr-2.6.2.js" />
+    <Content Include="lib\jquery\1.9.1\jquery.js" />
+    <Content Include="lib\jquery\1.9.1\jquery.min.js" />
+    <Content Include="lib\layer\1.9.3\demo.html" />
+    <Content Include="lib\layer\1.9.3\extend\layer.ext.js" />
+    <Content Include="lib\layer\1.9.3\layer.js" />
+    <Content Include="lib\layer\1.9.3\skin\default\icon-ext.png" />
+    <Content Include="lib\layer\1.9.3\skin\default\icon.png" />
+    <Content Include="lib\layer\1.9.3\skin\default\loading-0.gif" />
+    <Content Include="lib\layer\1.9.3\skin\default\loading-1.gif" />
+    <Content Include="lib\layer\1.9.3\skin\default\loading-2.gif" />
+    <Content Include="lib\layer\1.9.3\skin\layer.css" />
+    <Content Include="lib\layer\1.9.3\skin\layer.ext.css" />
+    <Content Include="lib\layer\1.9.3\skin\mono\default.png" />
+    <Content Include="lib\layer\1.9.3\skin\mono\style.css" />
+    <Content Include="lib\layer\1.9.3\更新日志.txt" />
+    <Content Include="lib\Validform\5.3.2\passwordStrength-min.js" />
+    <Content Include="lib\Validform\5.3.2\Validform.js" />
+    <Content Include="lib\Validform\5.3.2\Validform.min.js" />
     <Content Include="skin\blue\acrossTab-bg.png" />
     <Content Include="skin\blue\acrossTab.png" />
     <Content Include="skin\blue\icon_arrow.png" />
@@ -189,12 +210,18 @@
   <ItemGroup>
     <Compile Include="App_Start\ExceptionFilter.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUserAddModel.cs" />
+    <Compile Include="Models\AdminUserAddViewModel.cs" />
+    <Compile Include="Models\AdminUserEditModel.cs" />
+    <Compile Include="Models\AdminUserEditViewModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PermissionAddNewModel.cs" />
     <Compile Include="Models\PermissionEditModel.cs" />
     <Compile Include="Models\RoleAddModel.cs" />
@@ -225,6 +252,12 @@
     <Content Include="Views\Role\List.cshtml" />
     <Content Include="Views\Role\Add.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="lib\layer\1.9.3\doc\jquery下载.url" />
+    <Content Include="lib\layer\1.9.3\doc\layer交流.url" />
+    <Content Include="lib\layer\1.9.3\doc\layer官网.url" />
+    <Content Include="Views\AdminUser\List.cshtml" />
+    <Content Include="Views\AdminUser\Add.cshtml" />
+    <Content Include="Views\AdminUser\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

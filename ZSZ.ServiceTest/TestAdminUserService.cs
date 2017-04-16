@@ -10,22 +10,7 @@ namespace ZSZ.ServiceTest
   public class TestAdminUserService
   {
     private AdminUserService auService = new AdminUserService();
-    [TestMethod]
-    public void TestAddAndLogin()
-    {
-      long id = auService.AddAdminUser("abc", "134133", "adsf", "s", null);
-      var admin = auService.GetById(id);
-      Assert.AreEqual(admin.Name, "abc");
-      Assert.AreEqual(admin.PhoneNum, "134133");
-      Assert.AreEqual(admin.Email, "s");
-      Assert.IsNull(admin.CityId);
-      Assert.IsTrue(auService.CheckLogin("134133", "adsf"));
-      Assert.IsFalse(auService.CheckLogin("134133", "sadsf"));
-      auService.GetAll();
-      Assert.IsNotNull(auService.GetByPhoneNum("134133"));
-      auService.MarkDeleted(id);
-    }
-    
+
     #region TestGetAll(long? cityId)
     [TestMethod]
     public void TestGetAll_IdExist()
@@ -45,6 +30,23 @@ namespace ZSZ.ServiceTest
       var au2 = auService.GetAll();
     }
     #endregion
+    [TestMethod]
+    public void TestAddAndLogin()
+    {
+      long id = auService.AddAdminUser("abc", "134133", "adsf", "s", null);
+      var admin = auService.GetById(id);
+      Assert.AreEqual(admin.Name, "abc");
+      Assert.AreEqual(admin.PhoneNum, "134133");
+      Assert.AreEqual(admin.Email, "s");
+      Assert.IsNull(admin.CityId);
+      Assert.IsTrue(auService.CheckLogin("134133", "adsf"));
+      Assert.IsFalse(auService.CheckLogin("134133", "sadsf"));
+      auService.GetAll();
+      Assert.IsNotNull(auService.GetByPhoneNum("134133"));
+      //auService.MarkDeleted(id);
+    }
+    
+  
 
     [TestMethod]
     public void TestGetAll()

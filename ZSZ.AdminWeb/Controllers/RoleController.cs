@@ -38,6 +38,10 @@ namespace ZSZ.AdminWeb.Controllers
     [HttpGet]
     public ActionResult Add()
     {
+      if (!ModelState.IsValid)
+      {
+        return Json(new AjaxResult { Status = "Error", ErrorMsg = MVCHelper.GetValidMsg(ModelState) });
+      }
       var perms = _PermService.GetAll();
       return View(perms);
     }

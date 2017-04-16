@@ -8,8 +8,8 @@ using ZSZ.Service.Entities.RBAC;
 
 namespace ZSZ.Service.ModelConfig.RBAC
 {
- public class PermissionConfig:EntityTypeConfiguration<PermissionEntity>
-      {
+  public class PermissionConfig : EntityTypeConfiguration<PermissionEntity>
+  {
     public PermissionConfig()
     {
       this.ToTable("T_Permissions");
