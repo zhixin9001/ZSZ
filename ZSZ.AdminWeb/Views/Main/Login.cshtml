@@ -60,10 +60,12 @@
             if (res.status == "OK") {
               alert("login success");
             } else {
+              $("#imgVerifyCode").click();   
               alert(res.errorMsg);
             };
           },
           error: function () {
+            $("#imgVerifyCode").click();   
             alert("ajax error");
           }
         });
