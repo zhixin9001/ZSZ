@@ -17,20 +17,20 @@ namespace ZSZ.AdminWeb.Controllers
     public IRoleService _RoleService { get; set; }
 
     [HasPermission("Admin.List")]
-    [HasPermission("Admin.Add")]
     public ActionResult List()
     {
       var list = _AuService.GetAll();
       return View(list);
     }
 
+    [HasPermission("Admin.Delete")]
     public ActionResult Delete(long id)
     {
       _AuService.MarkDeleted(id);
       return Json(new AjaxResult { Status = "OK" });
     }
 
-    //[HasPermission("Admin.Add")]
+    [HasPermission("Admin.Add")]
     [HttpGet]
     public ActionResult Add()
     {
@@ -46,22 +46,7 @@ namespace ZSZ.AdminWeb.Controllers
       return View(model);
     }
 
-    public ActionResult CheckPhoneNum(string phoneNum, long? userId)
-    {
-      var user = _AuService.GetByPhoneNum(phoneNum);
-      bool isOK = false;
-      //如果没有给userId，则说明是“插入”，只要检查是不是存在这个手机号
-      if (userId == null)
-      {
-        isOK = (user == null);
-      }
-      else//如果有userId，则说明是修改，则要把自己排除在外
-      {
-        isOK = (user == null || user.Id == userId);
-      }
-      return Json(new AjaxResult { Status = isOK ? "ok" : "exists" });
-    }
-
+    [HasPermission("Admin.Add")]
     [HttpPost]
     public ActionResult Add(AdminUserAddModel model)
     {
@@ -90,6 +75,23 @@ namespace ZSZ.AdminWeb.Controllers
       return Json(new AjaxResult { Status = "ok" });
     }
 
+    public ActionResult CheckPhoneNum(string phoneNum, long? userId)
+    {
+      var user = _AuService.GetByPhoneNum(phoneNum);
+      bool isOK = false;
+      //如果没有给userId，则说明是“插入”，只要检查是不是存在这个手机号
+      if (userId == null)
+      {
+        isOK = (user == null);
+      }
+      else//如果有userId，则说明是修改，则要把自己排除在外
+      {
+        isOK = (user == null || user.Id == userId);
+      }
+      return Json(new AjaxResult { Status = isOK ? "ok" : "exists" });
+    }
+
+    [HasPermission("Admin.Edit")]
     [HttpGet]
     public ActionResult Edit(long id)
     {
@@ -115,6 +117,7 @@ namespace ZSZ.AdminWeb.Controllers
       return View(model);
     }
 
+    [HasPermission("Admin.Edit")]
     [HttpPost]
     public ActionResult Edit(AdminUserEditModel model)
     {

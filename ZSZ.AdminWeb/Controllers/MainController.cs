@@ -13,7 +13,7 @@ namespace ZSZ.AdminWeb.Controllers
 {
   public class MainController : Controller
   {
-    public IAdminUserService adminService { get; set; }
+    public IAdminUserService _AdminService { get; set; }
 
     // GET: Main
     public ActionResult Index()
@@ -39,10 +39,10 @@ namespace ZSZ.AdminWeb.Controllers
         return Json(new AjaxResult { Status = "Error", ErrorMsg = "VerifyCode Error" });
       }
 
-      bool result = adminService.CheckLogin(model.PhoneNum, model.Password);
+      bool result = _AdminService.CheckLogin(model.PhoneNum, model.Password);
       if (result)
       {
-        Session["LoginUserId"] = adminService.GetByPhoneNum(model.PhoneNum).Id;
+        Session["LoginUserId"] = _AdminService.GetByPhoneNum(model.PhoneNum).Id;
         return Json(new AjaxResult { Status = "OK" });
       }
       else

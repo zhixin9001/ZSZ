@@ -1,6 +1,6 @@
 ﻿@model ZSZ.DTO.AdminUserDTO[]
 @{
-  ViewBag.Title = "Admin List";  
+  ViewBag.Title = "Admin List";
 }
 
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -77,6 +77,8 @@
             $(obj).parents("tr").remove();
             layer.msg('已删除!', { icon: 1, time: 2000 });
             location.reload();
+          } else if (res.status == "redirect") {
+            location.href = res.data
           } else {
             layer.msg('删除失败!', { icon: 2, time: 2000 });
           }
@@ -96,8 +98,9 @@
         success: function (res) {
           if (res.status == "OK") {
             location.reload();//刷新页面
-          }
-          else {
+          } else if (res.status == "redirect") {
+            location.href = res.data
+          } else {
             alert("删除失败");
           }
         },
