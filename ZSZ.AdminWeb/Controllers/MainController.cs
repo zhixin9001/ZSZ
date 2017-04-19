@@ -34,7 +34,7 @@ namespace ZSZ.AdminWeb.Controllers
         return Json(new AjaxResult { Status = "Error", ErrorMsg = MVCHelper.GetValidMsg(ModelState) });
       }
 
-      if (model.VerifyCode != Session["verifyCode"].ToString())
+      if (model.VerifyCode != TempData["verifyCode"].ToString())
       {
         return Json(new AjaxResult { Status = "Error", ErrorMsg = "VerifyCode Error" });
       }
@@ -54,8 +54,8 @@ namespace ZSZ.AdminWeb.Controllers
     public ActionResult CreateVerifyCode()
     {
       string verifyCode = CommonHelper.GenerateCaptchaCode(4);
-      Session["verifyCode"] = verifyCode;
-      //In there the ms needn't using,the mvc framework will automatically doing this for us
+      TempData["verifyCode"] = verifyCode;
+      //In there the ms needn't using, the mvc framework will automatically doing this for us
       MemoryStream ms = ImageFactory.GenerateImage(verifyCode, 60, 100, 20,6);
       return File(ms, "image/jpeg");
     }

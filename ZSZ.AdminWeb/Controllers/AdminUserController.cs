@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZSZ.AdminWeb.App_Start;
 using ZSZ.AdminWeb.Models;
 using ZSZ.Common;
 using ZSZ.IService;
@@ -15,7 +16,8 @@ namespace ZSZ.AdminWeb.Controllers
     public ICityService _CityService { get; set; }
     public IRoleService _RoleService { get; set; }
 
-    // GET: AdminUser
+    [HasPermission("Admin.List")]
+    [HasPermission("Admin.Add")]
     public ActionResult List()
     {
       var list = _AuService.GetAll();
@@ -28,6 +30,7 @@ namespace ZSZ.AdminWeb.Controllers
       return Json(new AjaxResult { Status = "OK" });
     }
 
+    //[HasPermission("Admin.Add")]
     [HttpGet]
     public ActionResult Add()
     {
