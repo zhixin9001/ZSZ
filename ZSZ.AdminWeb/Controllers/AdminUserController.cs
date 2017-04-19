@@ -75,6 +75,8 @@ namespace ZSZ.AdminWeb.Controllers
       return Json(new AjaxResult { Status = "ok" });
     }
 
+    [HasPermission("Admin.Add")]
+    [HasPermission("Admin.List")]
     public ActionResult CheckPhoneNum(string phoneNum, long? userId)
     {
       var user = _AuService.GetByPhoneNum(phoneNum);
