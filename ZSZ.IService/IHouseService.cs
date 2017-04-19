@@ -17,6 +17,8 @@ namespace ZSZ.IService
 
     long AddNew(HouseDTO house);
 
+    long AddNew(HouseAddNewDTO newHouse);
+
     void Update(HouseDTO house);
 
     void MarkDeleted(long id);

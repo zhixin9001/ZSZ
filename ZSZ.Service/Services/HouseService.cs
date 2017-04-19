@@ -44,6 +44,44 @@ namespace ZSZ.Service.Services
       }
     }
 
+    public long AddNew(HouseAddNewDTO house)
+    {
+      HouseEntity houseEntity = new HouseEntity();
+      houseEntity.Address = house.Address;
+      houseEntity.Area = house.Area;
+
+      using (ZszDBContext ctx = new ZszDBContext())
+      {
+        CommonService<AttachmentEntity> attBS
+            = new CommonService<AttachmentEntity>(ctx);
+        //拿到house.AttachmentIds为主键的房屋配套设施
+        var atts = attBS.GetAll().Where(a => house.AttachmentIds.Contains(a.Id));
+        //houseEntity.Attachments = new List<AttachmentEntity>();
+        foreach (var att in atts)
+        {
+          houseEntity.Attachments.Add(att);
+        }
+        houseEntity.CheckInDateTime = house.CheckInDateTime;
+        houseEntity.CommunityId = house.CommunityId;
+        houseEntity.DecorateStatusId = house.DecorateStatusId;
+        houseEntity.Description = house.Description;
+        houseEntity.Direction = house.Direction;
+        houseEntity.FloorIndex = house.FloorIndex;
+        //houseEntity.HousePics 新增后再单独添加
+        houseEntity.LookableDateTime = house.LookableDateTime;
+        houseEntity.MonthRent = house.MonthRent;
+        houseEntity.OwnerName = house.OwnerName;
+        houseEntity.OwnerPhoneNum = house.OwnerPhoneNum;
+        houseEntity.RoomTypeId = house.RoomTypeId;
+        houseEntity.StatusId = house.StatusId;
+        houseEntity.TotalFloorCount = house.TotalFloorCount;
+        houseEntity.TypeId = house.TypeId;
+        ctx.Houses.Add(houseEntity);
+        ctx.SaveChanges();
+        return houseEntity.Id;
+      }
+    }
+
     public long AddNewHousePic(HousePicDTO housePic)
     {
       using (var ctx = new ZszDBContext())
@@ -113,8 +151,8 @@ namespace ZSZ.Service.Services
         var houses = cs.GetAll()
           .Include(h => h.Attachments)
           .Include(h => h.Community)
-          .Include(h => nameof(HouseEntity.Community) + "." + nameof(CommunityEntity.Region) + "." + nameof(RegionEntity.City))
-          .Include(h => nameof(HouseEntity.Community) + "." + nameof(CommunityEntity.Region))
+          .Include(nameof(HouseEntity.Community) + "." + nameof(CommunityEntity.Region) + "." + nameof(RegionEntity.City))
+          .Include(nameof(HouseEntity.Community) + "." + nameof(CommunityEntity.Region))
           .Include(h => h.DecorateStatus)
           .Include(h => h.HousePics)
           .Include(h => h.RoomType)

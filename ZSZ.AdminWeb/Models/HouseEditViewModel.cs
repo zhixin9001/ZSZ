@@ -6,7 +6,7 @@ using ZSZ.DTO;
 
 namespace ZSZ.AdminWeb.Models
 {
-  public class HouseAddViewModel
+  public class HouseEditViewModel
   {
     public RegionDTO[] Regions { get; set; }
     public IdNameDTO[] RoomTypes { get; set; }
@@ -14,5 +14,6 @@ namespace ZSZ.AdminWeb.Models
     public IdNameDTO[] DecorateStatuses { get; set; }
     public IdNameDTO[] Types { get; set; }
     public AttachmentDTO[] Attachments { get; set; }
+    public HouseDTO House { get; set; }
   }
 }

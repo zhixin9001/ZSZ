@@ -19,7 +19,7 @@ namespace ZSZ.AdminWeb.App_Start
         return;
       }
 
-      var userId = (long?)filterContext.HttpContext.Session["LoginUserId"];
+      var userId = (long?)filterContext.HttpContext.Session[SessionHelper.LOGIN_SESSION_NAME];
       if (userId == null)
       {
         //filterContext.HttpContext.Response.Write("Hasn't login");     //this is not recommand

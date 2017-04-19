@@ -42,7 +42,7 @@ namespace ZSZ.AdminWeb.Controllers
       bool result = _AdminService.CheckLogin(model.PhoneNum, model.Password);
       if (result)
       {
-        Session["LoginUserId"] = _AdminService.GetByPhoneNum(model.PhoneNum).Id;
+        Session[SessionHelper.LOGIN_SESSION_NAME] = _AdminService.GetByPhoneNum(model.PhoneNum).Id;
         return Json(new AjaxResult { Status = "OK" });
       }
       else

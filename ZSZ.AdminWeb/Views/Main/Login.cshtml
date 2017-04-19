@@ -58,7 +58,7 @@
           data: formData,
           success: function (res) {
             if (res.status == "OK") {
-              alert("login success");
+              location.href = "/Main/Index";
             } else {
               $("#imgVerifyCode").click();   
               alert(res.errorMsg);
