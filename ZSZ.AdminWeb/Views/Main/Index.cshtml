@@ -1,4 +1,7 @@
-﻿
+﻿@model AdminUserDTO
+@{ 
+  ViewBag.Title = "Home Page";
+}
 <header class="Hui-header cl">
   <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
   <nav class="mainnav cl" id="Hui-nav">
@@ -17,11 +20,11 @@
   <ul class="Hui-userbar">
     <li>超级管理员</li>
     <li class="dropDown dropDown_hover">
-      <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+      <a href="#" class="dropDown_A">@Model.PhoneNum <i class="Hui-iconfont">&#xe6d5;</i></a>
       <ul class="dropDown-menu radius box-shadow">
         <li><a href="#">个人信息</a></li>
         <li><a href="#">切换账户</a></li>
-        <li><a href="#">退出</a></li>
+        <li><a href="~/Main/Logout">退出</a></li>
       </ul>
     </li>
     <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
@@ -46,9 +49,9 @@
       <dt><i class="Hui-iconfont">&#xe620;</i> 权限管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
       <dd>
         <ul>
-          <li><a _href="product-brand.html" href="javascript:void(0)">品牌管理</a></li>
-          <li><a _href="product-category.html" href="javascript:void(0)">分类管理</a></li>
-          <li><a _href="product-list.html" href="javascript:void(0)">产品管理</a></li>
+          <li><a _href="~/Permission/List" href="javascript:void(0)">权限项管理</a></li>
+          <li><a _href="~/Role/List" href="javascript:void(0)">角色管理</a></li>
+          <li><a _href="~/AdminUser/List" href="javascript:void(0)">操作员管理</a></li>
         </ul>
       </dd>
     </dl>
@@ -62,11 +65,11 @@
       </dd>
     </dl>-->
     <dl id="menu-comments">
-      <dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+      <dt><i class="Hui-iconfont">&#xe622;</i> 房源管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
       <dd>
         <ul>
-          <li><a _href="http://h-ui.duoshuo.com/admin/" href="javascript:;">评论列表</a></li>
-          <li><a _href="feedback-list.html" href="javascript:void(0)">意见反馈</a></li>
+          <li><a _href="~/House/List?typeid=7&&pageindex=1" href="javascript:;">合租管理</a></li>
+          <li><a _href="~/House/List?typeid=8&&pageindex=1" href="javascript:void(0)">整租管理</a></li>
         </ul>
       </dd>
     </dl>
@@ -150,7 +153,8 @@
   </div>
 </section>
 
-<script type="text/javascript">
+@section FooterScript{
+  <script type="text/javascript">
     /*资讯-添加*/
     function article_add(title, url) {
       var index = layer.open({
@@ -182,8 +186,8 @@
     function member_add(title, url, w, h) {
       layer_show(title, url, w, h);
     }
-</script>
-<script type="text/javascript">
+  </script>
+  <script type="text/javascript">
     var _hmt = _hmt || [];
     (function () {
       var hm = document.createElement("script");
@@ -193,4 +197,5 @@
     })();
     var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
-</script>
+  </script>
+}

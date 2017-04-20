@@ -18,7 +18,14 @@ namespace ZSZ.AdminWeb.Controllers
     // GET: Main
     public ActionResult Index()
     {
-      return View();
+      long? userId = SessionHelper.GetLoginId(HttpContext);
+      if (!userId.HasValue)
+      {
+        return Redirect("~/Main/Login");
+      }
+      var user = _AdminService.GetById(userId.Value);
+
+      return View(user);
     }
 
     [HttpGet]
@@ -26,6 +33,7 @@ namespace ZSZ.AdminWeb.Controllers
     {
       return View();
     }
+
     [HttpPost]
     public ActionResult Login(LoginModel model)
     {
@@ -51,12 +59,18 @@ namespace ZSZ.AdminWeb.Controllers
       }
     }
 
+    public ActionResult Logout()
+    {
+      Session.Abandon();
+      return Redirect("~/Main/Login");
+    }
+
     public ActionResult CreateVerifyCode()
     {
       string verifyCode = CommonHelper.GenerateCaptchaCode(4);
       TempData["verifyCode"] = verifyCode;
       //In there the ms needn't using, the mvc framework will automatically doing this for us
-      MemoryStream ms = ImageFactory.GenerateImage(verifyCode, 60, 100, 20,6);
+      MemoryStream ms = ImageFactory.GenerateImage(verifyCode, 60, 100, 20, 6);
       return File(ms, "image/jpeg");
     }
   }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZSZ.AdminWeb.App_Start;
 using ZSZ.AdminWeb.Models;
 using ZSZ.Common;
 using ZSZ.DTO;
@@ -22,6 +23,7 @@ namespace ZSZ.AdminWeb.Controllers
     public ICommunityService _CommunityService { get; set; }
 
     // GET: House
+    [HasPermission("House.List")]
     public ActionResult List(long typeId, int pageIndex = 1)
     {
       var userId = SessionHelper.GetLoginId(HttpContext).Value;
@@ -38,6 +40,7 @@ namespace ZSZ.AdminWeb.Controllers
       return View(houses);
     }
     [HttpGet]
+    [HasPermission("House.Add")]
     public ActionResult Add()
     {
       var userId = SessionHelper.GetLoginId(HttpContext).Value;
@@ -59,6 +62,7 @@ namespace ZSZ.AdminWeb.Controllers
       return View(houseAddViewModel);
     }
     [HttpPost]
+    [HasPermission("House.Add")]
     public ActionResult Add(HouseAddModel model)
     {
       var userId = SessionHelper.GetLoginId(HttpContext).Value;
@@ -96,7 +100,7 @@ namespace ZSZ.AdminWeb.Controllers
       long houseId = _HouseService.AddNew(dto);
       return Json(new AjaxResult { Status = "ok" });
     }
-    
+
     public ActionResult LoadCommunities(long regionId)
     {
       var communities = _CommunityService.GetByRegionId(regionId);
@@ -104,6 +108,7 @@ namespace ZSZ.AdminWeb.Controllers
     }
 
     [HttpGet]
+    [HasPermission("House.Edit")]
     public ActionResult Edit(long id)
     {
       var userId = SessionHelper.GetLoginId(HttpContext).Value;
@@ -133,6 +138,7 @@ namespace ZSZ.AdminWeb.Controllers
     }
 
     [HttpPost]
+    [HasPermission("House.Edit")]
     public ActionResult Edit(HouseEditModel model)
     {
       HouseDTO dto = new HouseDTO();
@@ -158,6 +164,21 @@ namespace ZSZ.AdminWeb.Controllers
       _HouseService.Update(dto);
 
       //CreateStaticPage(model.Id);//编辑房源的时候重新生成静态页面
+      return Json(new AjaxResult { Status = "ok" });
+    }
+    [HasPermission("House.Delete")]
+    public ActionResult Delete(long id)
+    {
+      _HouseService.MarkDeleted(id);
+      return Json(new AjaxResult { Status = "ok" });
+    }
+    [HasPermission("House.Delete")]
+    public ActionResult BatchDelete(long[] ids)
+    {
+      foreach (var item in ids)
+      {
+        _HouseService.MarkDeleted(item);
+      }
       return Json(new AjaxResult { Status = "ok" });
     }
   }
