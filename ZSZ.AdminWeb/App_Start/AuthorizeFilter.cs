@@ -30,13 +30,13 @@ namespace ZSZ.AdminWeb.App_Start
           var ajaxResult = new AjaxResult
           {
             Status = "redirect",
-            Data = "/Main/Login",
+            Data = "/Home/Login",
             ErrorMsg = "Should Login",
           };
 
           filterContext.Result = new JsonNetResult { Data = ajaxResult };
         }
-        filterContext.Result = new RedirectResult("~/Main/Login");
+        filterContext.Result = new RedirectResult("~/Home/Login");
         return;
       }
 

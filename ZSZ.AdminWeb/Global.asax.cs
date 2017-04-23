@@ -45,6 +45,7 @@ namespace ZSZ.AdminWeb
 
       //type1.IsAssignableFrom(type2)  type1类型的变量，是否可以指向type2类型的对象
       //type2 是否实现了type1接口
+
       var container = builder.Build();
       //set this container was the default resolver, mvc system will get object from this container too
       DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
