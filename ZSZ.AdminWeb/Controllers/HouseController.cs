@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CodeCarvings.Piczard;
+using CodeCarvings.Piczard.Filters.Watermarks;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -179,6 +182,41 @@ namespace ZSZ.AdminWeb.Controllers
       {
         _HouseService.MarkDeleted(item);
       }
+      return Json(new AjaxResult { Status = "ok" });
+    }
+
+    public ActionResult PicUpload(int houseId)
+    {
+      return View(houseId);
+    }
+
+    public ActionResult UploadPic(int houseId, HttpPostedFileBase file)
+    {
+      string md5 = CommonHelper.CalcMD5(file.InputStream);
+      //file.InputStream.Position = 0;
+      string suffix = Path.GetExtension(file.FileName);
+      string path = "/upload/" + DateTime.Now.ToString("yyyy/MM/dd") + "/" + md5 + suffix;
+      string thumbPath = "/upload/" + DateTime.Now.ToString("yyyy/MM/dd") + "/" + md5 + "_thumb" + suffix;
+
+      string fullPath = HttpContext.Server.MapPath("~" + path);
+      string thumbFullPath = HttpContext.Server.MapPath("~" + thumbPath);
+      new FileInfo(fullPath).Directory.Create();
+      //file.SaveAs(fullPath);
+
+      ImageProcessingJob jobThumb = new ImageProcessingJob();
+      jobThumb.Filters.Add(new FixedResizeConstraint(200, 200));
+      jobThumb.SaveProcessedImageToFileSystem(file.InputStream, thumbFullPath);
+      //file.InputStream.Position = 0;
+      ImageWatermark imgWatermark =
+        new ImageWatermark(HttpContext.Server.MapPath("~/images/totop.png"));
+      imgWatermark.ContentAlignment = System.Drawing.ContentAlignment.BottomRight;
+      imgWatermark.Alpha = 50;
+      ImageProcessingJob jobNormal = new ImageProcessingJob();
+      jobNormal.Filters.Add(imgWatermark);
+      jobNormal.Filters.Add(new FixedResizeConstraint(400, 400));
+      jobNormal.SaveProcessedImageToFileSystem(file.InputStream,fullPath);
+
+      _HouseService.AddNewHousePic(new HousePicDTO { HouseId = houseId, Url = path, ThumbUrl = thumbPath });
       return Json(new AjaxResult { Status = "ok" });
     }
   }
