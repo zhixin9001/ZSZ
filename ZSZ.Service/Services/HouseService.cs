@@ -46,9 +46,12 @@ namespace ZSZ.Service.Services
 
     public long AddNew(HouseAddNewDTO house)
     {
-      HouseEntity houseEntity = new HouseEntity();
-      houseEntity.Address = house.Address;
-      houseEntity.Area = house.Area;
+      HouseEntity houseEntity = new HouseEntity
+      {
+        Address = house.Address,
+        Area = house.Area
+      };
+
 
       using (ZszDBContext ctx = new ZszDBContext())
       {

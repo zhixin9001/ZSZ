@@ -81,24 +81,27 @@ namespace ZSZ.AdminWeb.Controllers
         return Json(new AjaxResult { Status = "error", ErrorMsg = msg });
       }
 
-      HouseAddNewDTO dto = new HouseAddNewDTO();
-      dto.Address = model.Address;
-      dto.Area = model.Area;
-      dto.AttachmentIds = model.AttachmentIds;
-      dto.CheckInDateTime = model.CheckInDateTime;
-      dto.CommunityId = model.CommunityId;
-      dto.DecorateStatusId = model.DecorateStatusId;
-      dto.Description = model.Description;
-      dto.Direction = model.Direction;
-      dto.FloorIndex = model.FloorIndex;
-      dto.LookableDateTime = model.LookableDateTime;
-      dto.MonthRent = model.MonthRent;
-      dto.OwnerName = model.OwnerName;
-      dto.OwnerPhoneNum = model.OwnerPhoneNum;
-      dto.RoomTypeId = model.RoomTypeId;
-      dto.StatusId = model.StatusId;
-      dto.TotalFloorCount = model.TotalFloor;
-      dto.TypeId = model.TypeId;
+      HouseAddNewDTO dto = new HouseAddNewDTO()
+      {
+        Address = model.Address,
+        Area = model.Area,
+        AttachmentIds = model.AttachmentIds,
+        CheckInDateTime = model.CheckInDateTime,
+        CommunityId = model.CommunityId,
+        DecorateStatusId = model.DecorateStatusId,
+        Description = model.Description,
+        Direction = model.Direction,
+        FloorIndex = model.FloorIndex,
+        LookableDateTime = model.LookableDateTime,
+        MonthRent = model.MonthRent,
+        OwnerName = model.OwnerName,
+        OwnerPhoneNum = model.OwnerPhoneNum,
+        RoomTypeId = model.RoomTypeId,
+        StatusId = model.StatusId,
+        TotalFloorCount = model.TotalFloor,
+        TypeId = model.TypeId
+      };
+
 
       long houseId = _HouseService.AddNew(dto);
       return Json(new AjaxResult { Status = "ok" });
@@ -121,8 +124,7 @@ namespace ZSZ.AdminWeb.Controllers
         return View("Error", (object)"总部不能进行房源管理");
       }
       var house = _HouseService.GetById(id);
-      HouseEditViewModel model = new HouseEditViewModel();
-      model.House = house;
+      HouseEditViewModel model = new HouseEditViewModel() { House = house };
 
       var regions = _RegionService.GetAll(cityId.Value);
       var roomTypes = _IdNameService.GetAll("户型");
@@ -144,26 +146,29 @@ namespace ZSZ.AdminWeb.Controllers
     [HasPermission("House.Edit")]
     public ActionResult Edit(HouseEditModel model)
     {
-      HouseDTO dto = new HouseDTO();
-      dto.Address = model.Address;
-      dto.Area = model.Area;
-      dto.AttachmentIds = model.AttachmentIds;
-      dto.CheckInDateTime = model.CheckInDateTime;
-      //有没有感觉强硬用一些不适合的DTO，有一些没用的属性时候的迷茫？
-      dto.CommunityId = model.CommunityId;
-      dto.DecorateStatusId = model.DecorateStatusId;
-      dto.Description = model.Description;
-      dto.Direction = model.Direction;
-      dto.FloorIndex = model.FloorIndex;
-      dto.Id = model.Id;
-      dto.LookableDateTime = model.LookableDateTime;
-      dto.MonthRent = model.MonthRent;
-      dto.OwnerName = model.OwnerName;
-      dto.OwnerPhoneNum = model.OwnerPhoneNum;
-      dto.RoomTypeId = model.RoomTypeId;
-      dto.StatusId = model.StatusId;
-      dto.TotalFloorCount = model.TotalFloor;
-      dto.TypeId = model.TypeId;
+      HouseDTO dto = new HouseDTO()
+      {
+        Address = model.Address,
+        Area = model.Area,
+        AttachmentIds = model.AttachmentIds,
+        CheckInDateTime = model.CheckInDateTime,
+        //有没有感觉强硬用一些不适合的DTO，有一些没用的属性时候的迷茫？
+        CommunityId = model.CommunityId,
+        DecorateStatusId = model.DecorateStatusId,
+        Description = model.Description,
+        Direction = model.Direction,
+        FloorIndex = model.FloorIndex,
+        Id = model.Id,
+        LookableDateTime = model.LookableDateTime,
+        MonthRent = model.MonthRent,
+        OwnerName = model.OwnerName,
+        OwnerPhoneNum = model.OwnerPhoneNum,
+        RoomTypeId = model.RoomTypeId,
+        StatusId = model.StatusId,
+        TotalFloorCount = model.TotalFloor,
+        TypeId = model.TypeId
+      };
+
       _HouseService.Update(dto);
 
       //CreateStaticPage(model.Id);//编辑房源的时候重新生成静态页面
@@ -208,9 +213,12 @@ namespace ZSZ.AdminWeb.Controllers
       jobThumb.SaveProcessedImageToFileSystem(file.InputStream, thumbFullPath);
       //file.InputStream.Position = 0;
       ImageWatermark imgWatermark =
-        new ImageWatermark(HttpContext.Server.MapPath("~/images/totop.png"));
-      imgWatermark.ContentAlignment = System.Drawing.ContentAlignment.BottomRight;
-      imgWatermark.Alpha = 50;
+        new ImageWatermark(HttpContext.Server.MapPath("~/images/totop.png"))
+        {
+          ContentAlignment = System.Drawing.ContentAlignment.BottomRight,
+          Alpha = 50
+        };
+
       ImageProcessingJob jobNormal = new ImageProcessingJob();
       jobNormal.Filters.Add(imgWatermark);
       jobNormal.Filters.Add(new FixedResizeConstraint(400, 400));
