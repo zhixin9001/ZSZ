@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelConfig\HousePicConfig.cs" />
     <Compile Include="Services\HouseService.cs" />
     <Compile Include="Services\IdNameService.cs" />
     <Compile Include="Services\PermissionService.cs" />
@@ -113,6 +114,5 @@
       <Name>ZSZ.IService</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

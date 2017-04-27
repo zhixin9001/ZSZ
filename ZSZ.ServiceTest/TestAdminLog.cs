@@ -15,7 +15,7 @@ namespace ZSZ.ServiceTest
     public void TestAddNew()
     {
       var adminLog = new AdminLogService();
-      var id = adminLog.AddNew(5, "Testing");
+      var id = adminLog.AddNew(1, "Testing");
       var log = adminLog.GetById(id);
       Assert.AreEqual(log.Message, "Testing");
     }

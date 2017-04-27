@@ -214,10 +214,16 @@ namespace ZSZ.AdminWeb.Controllers
       ImageProcessingJob jobNormal = new ImageProcessingJob();
       jobNormal.Filters.Add(imgWatermark);
       jobNormal.Filters.Add(new FixedResizeConstraint(400, 400));
-      jobNormal.SaveProcessedImageToFileSystem(file.InputStream,fullPath);
+      jobNormal.SaveProcessedImageToFileSystem(file.InputStream, fullPath);
 
       _HouseService.AddNewHousePic(new HousePicDTO { HouseId = houseId, Url = path, ThumbUrl = thumbPath });
       return Json(new AjaxResult { Status = "ok" });
+    }
+
+    public ActionResult PicList(long id)
+    {
+      var pics = _HouseService.GetPics(id);
+      return View(pics);
     }
   }
 }

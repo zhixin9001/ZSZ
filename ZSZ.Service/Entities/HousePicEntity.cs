@@ -10,6 +10,7 @@ namespace ZSZ.Service.Entities
   {
     public long HouseId { get; set; }
     public string Url { get; set; }
-    public string ThumbUri { get; set; }
+    public string ThumbUrl { get; set; }
+    public virtual HouseEntity House { get; set; }
   }
 }

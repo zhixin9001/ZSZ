@@ -89,7 +89,7 @@ namespace ZSZ.Service.Services
         var entity = new HousePicEntity()
         {
           HouseId = housePic.HouseId,
-          ThumbUri = housePic.ThumbUrl,
+          ThumbUrl = housePic.ThumbUrl,
           Url = housePic.Url
         };
 
@@ -172,12 +172,14 @@ namespace ZSZ.Service.Services
       using (var ctx = new ZszDBContext())
       {
         var cs = new CommonService<HouseEntity>(ctx);
+        var house = cs.GetById(houseId);
+        var housePics = house.HousePics;
         return cs.GetById(houseId).HousePics
           .Select(p => new HousePicDTO()
           {
             Id = p.HouseId,
             CreateDateTime = p.CreateDateTime,
-            ThumbUrl = p.ThumbUri,
+            ThumbUrl = p.ThumbUrl,
             Url = p.Url
           }).ToArray();
       }
@@ -281,7 +283,7 @@ namespace ZSZ.Service.Services
       var firstPic = entity.HousePics.FirstOrDefault();
       if (firstPic != null)
       {
-        dto.FirstThumbUrl = firstPic.ThumbUri;
+        dto.FirstThumbUrl = firstPic.ThumbUrl;
       }
       dto.AttachmentIds = entity.Attachments.Select(i => i.Id).ToArray();
 
