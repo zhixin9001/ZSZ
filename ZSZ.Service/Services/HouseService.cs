@@ -177,14 +177,14 @@ namespace ZSZ.Service.Services
         var cs = new CommonService<HouseEntity>(ctx);
         var house = cs.GetById(houseId);
         var housePics = house.HousePics;
-        return cs.GetById(houseId).HousePics
-          .Select(p => new HousePicDTO()
-          {
-            Id = p.HouseId,
-            CreateDateTime = p.CreateDateTime,
-            ThumbUrl = p.ThumbUrl,
-            Url = p.Url
-          }).ToArray();
+        return housePics.Select(p => new HousePicDTO()
+        {
+          Id = p.Id,
+          HouseId = p.HouseId,
+          CreateDateTime = p.CreateDateTime,
+          ThumbUrl = p.ThumbUrl,
+          Url = p.Url
+        }).ToArray();
       }
     }
 

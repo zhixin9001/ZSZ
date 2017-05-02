@@ -233,5 +233,15 @@ namespace ZSZ.AdminWeb.Controllers
       var pics = _HouseService.GetPics(id);
       return View(pics);
     }
+
+    public ActionResult DeletePics(long[] selectedIds)
+    {
+      foreach(var id in selectedIds)
+      {
+        _HouseService.DeleteHousePic(id);
+      }
+      //the pic file in the disk will not be deleted
+      return Json(new AjaxResult { Status="ok"});
+    }
   }
 }
