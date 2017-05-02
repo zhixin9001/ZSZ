@@ -171,6 +171,17 @@
     <Content Include="slick\slick.css" />
     <Content Include="slick\slick.js" />
     <Content Include="slick\slick.min.js" />
+    <Content Include="upload\1.jpg" />
+    <Content Include="upload\2.jpg" />
+    <Content Include="upload\3.jpg" />
+    <Content Include="upload\4.jpg" />
+    <Content Include="upload\ht.jpg" />
+    <Content Include="upload\list-img.jpg" />
+    <Content Include="upload\list-tu.jpg" />
+    <Content Include="upload\map.jpg" />
+    <Content Include="upload\room.jpg" />
+    <Content Include="upload\roomlist.jpg" />
+    <Content Include="upload\yunshu.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -195,6 +206,10 @@
     <Content Include="slick\fonts\slick.ttf" />
     <Content Include="slick\fonts\slick.woff" />
     <Content Include="slick\slick.scss" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -205,7 +220,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Main\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZSZ.Common\ZSZ.Common.csproj">
