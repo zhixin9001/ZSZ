@@ -11,17 +11,16 @@ namespace ZSZ.Common
   {
     public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
     {
-      var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-      string rawValue = valueResult.AttemptedValue;
-      if (rawValue == null)
+      object value = base.BindModel(controllerContext, bindingContext);
+      if (value is string)
       {
-        return null;
+        string strValue = (string)value;
+        string value2 = ToDBC(strValue).Trim();
+        return value2;
       }
       else
       {
-        string value = ToDBC(rawValue.Trim());
-        object finalValue = Convert.ChangeType(value, bindingContext.ModelType);
-        return finalValue;
+        return value;
       }
     }
 

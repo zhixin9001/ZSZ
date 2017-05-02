@@ -66,19 +66,40 @@
               <a title="查看图片" href="javascript:;"
                  onclick="layer_show('查看图片', '/House/PicList/@house.Id',  '600', '400')" class="ml-5" style="text-decoration:none">
                 <i class="Hui-iconfont">&#xe613;</i>
-              </a> 
+              </a>
               <a title="上传图片" href="javascript:;"
                  onclick="layer_show('上传图片', '/House/PicUpload?houseid=@house.Id',  '600', '400')" class="ml-5" style="text-decoration:none">
                 <i class="Hui-iconfont">&#xe642;</i>
-              </a> 
+              </a>
             </td>
           </tr>
         }
       </tbody>
     </table>
+    @{
+      var pager = new ZSZ.Common.Pager();
+      pager.CurrentPageClassName = "curPager";
+      pager.MaxPagerCount = 10;
+      pager.PageIndex = (int)ViewBag.pageIndex;
+      pager.PageSize = 10;
+      pager.TotalCount = (int)ViewBag.totalCount;
+      pager.UrlPattern = "/House/List?typeId=" + ViewBag.typeId + "&&pageIndex={pn}";
+    }
+    <div id="pager">  @Html.Raw(pager.GetPagerHtml())</div>
   </form>
 </div>
 @section  FooterScript{
+  <style type="text/css">
+    #pager li {
+      float: left;
+      margin-left: 5px;
+      color: purple;
+    }
+
+    .curPager {
+      font-size: xx-large
+    }
+  </style>
   <script type="text/javascript">
     function add(title, url, w, h) {
       layer_show(title, url, w, h);
