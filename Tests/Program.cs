@@ -147,21 +147,23 @@ namespace Tests
       //Console.WriteLine("MinValue="+DateTime.MinValue);
       //Console.WriteLine("MaxValue=" + DateTime.MaxValue);
 
-      var dateTime1 = DateTime.Now;
-      var dateTime2 = dateTime1;
-      Console.WriteLine("dateTime1=" + dateTime1.ToShortDateString());
-      Console.WriteLine("dateTime2=" + dateTime2.ToShortDateString());
-      dateTime1=dateTime1.AddDays(3);
-      Console.WriteLine("**dateTime1.AddDays(3)");
-      Console.WriteLine("dateTime1=" + dateTime1.ToShortDateString());
-      Console.WriteLine("dateTime2=" + dateTime2.ToShortDateString());
+      //var dateTime1 = DateTime.Now;
+      //var dateTime2 = dateTime1;
+      //Console.WriteLine("dateTime1=" + dateTime1.ToShortDateString());
+      //Console.WriteLine("dateTime2=" + dateTime2.ToShortDateString());
+      //dateTime1=dateTime1.AddDays(3);
+      //Console.WriteLine("**dateTime1.AddDays(3)");
+      //Console.WriteLine("dateTime1=" + dateTime1.ToShortDateString());
+      //Console.WriteLine("dateTime2=" + dateTime2.ToShortDateString());
 
-      var dateTimeUTC = DateTime.UtcNow;
-      var s = new Random();
+      //var dateTimeUTC = DateTime.UtcNow;
+      //var s = new Random();
       #endregion
 
 
       //Console.WriteLine("OK");
+
+
       Console.ReadKey();
     }
 

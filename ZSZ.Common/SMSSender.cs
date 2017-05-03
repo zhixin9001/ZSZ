@@ -36,15 +36,17 @@ namespace ZSZ.Common
           , Uri.EscapeDataString(Code)
           , Uri.EscapeDataString(PhoneNum)));
 
-      JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-      var result = jsSerializer.Deserialize<SMSResult>(response);
+      //JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+      //var result = jsSerializer.Deserialize<SMSResult>(response);
+      var result = new SMSResult();
+      result.Code = response.Contains("0") ? "0" : "500";
       return result;
     }
   }
 
   public class SMSResult
   {
+    public string Code { get; set; }
     public string Msg { get; set; }
-    public string Result { get; set; }
   }
 }
