@@ -7,7 +7,7 @@ using ZSZ.DTO;
 
 namespace ZSZ.IService
 {
-  public interface IUserService
+  public interface IUserService : IServiceSupport
   {
     long AddNew(string phoneNum, string password);
 

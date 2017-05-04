@@ -7,7 +7,7 @@ using ZSZ.DTO;
 
 namespace ZSZ.IService
 {
-  public interface ISettingService
+  public interface ISettingService : IServiceSupport
   {
     void SetValue(string name, string value);
 

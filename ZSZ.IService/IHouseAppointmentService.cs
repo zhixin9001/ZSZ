@@ -7,7 +7,7 @@ using ZSZ.DTO;
 
 namespace ZSZ.IService
 {
-  public interface IHouseAppointmentService
+  public interface IHouseAppointmentService : IServiceSupport
   {
     long AddNew(long? userId, string name, string phoneNum, long houseId, DateTime visitDate);
 

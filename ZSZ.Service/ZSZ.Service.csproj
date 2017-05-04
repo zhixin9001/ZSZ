@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelConfig\HousePicConfig.cs" />
+    <Compile Include="Services\Class1.cs" />
     <Compile Include="Services\HouseService.cs" />
     <Compile Include="Services\IdNameService.cs" />
     <Compile Include="Services\PermissionService.cs" />

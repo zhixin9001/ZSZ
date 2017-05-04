@@ -48,6 +48,7 @@
     <Compile Include="IHouseAppointmentService.cs" />
     <Compile Include="IHouseService.cs" />
     <Compile Include="IIdNameService.cs" />
+    <Compile Include="Interface1.cs" />
     <Compile Include="IPermissionService.cs" />
     <Compile Include="IRegionService.cs" />
     <Compile Include="IRoleService.cs" />
