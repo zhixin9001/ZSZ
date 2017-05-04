@@ -9,7 +9,7 @@ namespace ZSZ.Common
   public class AjaxResult
   {
     public string Status { get; set; }
-    public string ErrorMsg { get; set; }
+    public string Msg { get; set; }
     public Object Data { get; set; }
   }
 }

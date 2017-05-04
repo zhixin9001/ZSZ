@@ -47,6 +47,15 @@ namespace ZSZ.Service.Services
       }
     }
 
+    public string GetValue(string value)
+    {
+      using (var ctx = new ZszDBContext())
+      {
+        var cs = new CommonService<IdNameEntity>(ctx);
+        return cs.GetAll().AsNoTracking().Where(h => h.TypeName == value).FirstOrDefault().Name;
+      }
+    }
+
     private IdNameDTO ToDTO(IdNameEntity entity)
     {
       if (entity == null) return null;

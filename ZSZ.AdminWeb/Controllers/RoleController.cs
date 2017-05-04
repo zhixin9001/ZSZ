@@ -45,7 +45,7 @@ namespace ZSZ.AdminWeb.Controllers
     {
       if (!ModelState.IsValid)
       {
-        return Json(new AjaxResult { Status = "Error", ErrorMsg = MVCHelper.GetValidMsg(ModelState) });
+        return Json(new AjaxResult { Status = "Error", Msg = MVCHelper.GetValidMsg(ModelState) });
       }
       var perms = _PermService.GetAll();
       return View(perms);

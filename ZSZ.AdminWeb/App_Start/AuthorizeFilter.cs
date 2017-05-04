@@ -31,7 +31,7 @@ namespace ZSZ.AdminWeb.App_Start
           {
             Status = "redirect",
             Data = "/Home/Login",
-            ErrorMsg = "Should Login",
+            Msg = "Should Login",
           };
 
           filterContext.Result = new JsonNetResult { Data = ajaxResult };

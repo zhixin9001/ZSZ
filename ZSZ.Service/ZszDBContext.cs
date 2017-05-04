@@ -15,7 +15,7 @@ namespace ZSZ.Service
     public static ILog log = LogManager.GetLogger(typeof(ZszDBContext));
     public ZszDBContext() : base("name=connStr")
     {
-      //Database.SetInitializer<ZszDBContext>(null);
+      Database.SetInitializer<ZszDBContext>(null);
       this.Database.Log = (sql) => {
         log.DebugFormat("EF执行SQL：{0}",sql);
       };

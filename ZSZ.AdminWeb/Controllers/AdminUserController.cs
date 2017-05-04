@@ -53,13 +53,13 @@ namespace ZSZ.AdminWeb.Controllers
       if (!ModelState.IsValid)
       {
         string msg = MVCHelper.GetValidMsg(ModelState);
-        return Json(new AjaxResult { Status = "error", ErrorMsg = msg });
+        return Json(new AjaxResult { Status = "error", Msg = msg });
       }
 
       bool isExist = _AuService.GetByPhoneNum(model.PhoneNum) != null;
       if (isExist)
       {
-        return Json(new AjaxResult { Status = "error", ErrorMsg = "The phone num has been used" });
+        return Json(new AjaxResult { Status = "error", Msg = "The phone num has been used" });
       }
 
       long? cityId = null;

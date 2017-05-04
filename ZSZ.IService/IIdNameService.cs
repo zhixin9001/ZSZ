@@ -13,6 +13,8 @@ namespace ZSZ.IService
 
     IdNameDTO GetById(long id);
 
+    string GetValue(string value);
+
     IdNameDTO[] GetAll(string typeName);
   }
 }

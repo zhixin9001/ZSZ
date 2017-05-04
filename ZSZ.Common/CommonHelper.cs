@@ -60,5 +60,6 @@ namespace ZSZ.Common
       return sbCode.ToString();
     }
     #endregion
+
   }
 }

@@ -7,6 +7,11 @@ using System.Web.Mvc;
 
 namespace ZSZ.Common
 {
+  public enum AjaxResultEnum
+  {
+    ok,
+    error
+  }
   public class MVCHelper
   {
     public static string GetValidMsg(ModelStateDictionary modelState)
@@ -25,6 +30,18 @@ namespace ZSZ.Common
         }
       }
       return sb.ToString();
+    }
+
+    public static JsonResult ReturnJsonResult(AjaxResultEnum status, string msg)
+    {
+      return new JsonResult
+      {
+        Data = new AjaxResult
+        {
+          Status = status.ToString(),
+          Msg = msg
+        }
+      };
     }
   }
 }

@@ -19,6 +19,12 @@ namespace ZSZ.IService
 
     void SetUserCityId(long userId, long cityId);
 
-    void UpdatePwd(long userId,string newPassword);
+    void UpdatePwd(long userId, string newPassword);
+
+    void IncrLoginError(long id);
+
+    void ResetLoginError(long id);
+
+    bool IsLocked(long id);
   }
 }

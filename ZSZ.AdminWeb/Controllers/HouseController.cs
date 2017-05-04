@@ -78,7 +78,7 @@ namespace ZSZ.AdminWeb.Controllers
       if (!ModelState.IsValid)
       {
         var msg = MVCHelper.GetValidMsg(ModelState);
-        return Json(new AjaxResult { Status = "error", ErrorMsg = msg });
+        return Json(new AjaxResult { Status = "error", Msg = msg });
       }
 
       HouseAddNewDTO dto = new HouseAddNewDTO()

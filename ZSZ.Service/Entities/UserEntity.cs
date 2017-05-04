@@ -12,7 +12,7 @@ namespace ZSZ.Service.Entities
     public string PasswordHash { get; set; }
     public string PasswordSalt { get; set; }
     public int LoginErrorTimes { get; set; }
-    public DateTime LastLoginErrorDateTime { get; set; } = new DateTime(1990,1,1);
+    public DateTime? LastLoginErrorDateTime { get; set; } = new DateTime(1990,1,1);
     public long? CityId { get; set; }
 
     public virtual CityEntity City { get; set; }

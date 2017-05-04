@@ -41,12 +41,12 @@ namespace ZSZ.AdminWeb.Controllers
     {
       if (!ModelState.IsValid)
       {
-        return Json(new AjaxResult { Status = "Error", ErrorMsg = MVCHelper.GetValidMsg(ModelState) });
+        return Json(new AjaxResult { Status = "Error", Msg = MVCHelper.GetValidMsg(ModelState) });
       }
 
       if (model.VerifyCode != TempData["verifyCode"].ToString())
       {
-        return Json(new AjaxResult { Status = "Error", ErrorMsg = "VerifyCode Error" });
+        return Json(new AjaxResult { Status = "Error", Msg = "VerifyCode Error" });
       }
 
       bool result = _AdminService.CheckLogin(model.PhoneNum, model.Password);
@@ -57,7 +57,7 @@ namespace ZSZ.AdminWeb.Controllers
       }
       else
       {
-        return Json(new AjaxResult { Status = "Error", ErrorMsg = "Name or Password is error" });
+        return Json(new AjaxResult { Status = "Error", Msg = "Name or Password is error" });
       }
     }
 
