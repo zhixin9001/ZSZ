@@ -165,6 +165,11 @@
     <Content Include="js\mui.picker.min.js" />
     <Content Include="js\psong.js" />
     <Content Include="js\rem.js" />
+    <Content Include="js\slick\ajax-loader.gif" />
+    <Content Include="js\slick\fonts\slick.svg" />
+    <Content Include="js\slick\slick.css" />
+    <Content Include="js\slick\slick.js" />
+    <Content Include="js\slick\slick.min.js" />
     <Content Include="js\swiper.jquery.min.js" />
     <Content Include="js\swiper.min.js" />
     <Content Include="js\tchuang.js" />
@@ -193,11 +198,14 @@
     <Compile Include="App_Start\ExceptionFilter.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="FrontUtils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HouseIndexViewModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Models\UserRegModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,6 +227,15 @@
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\Register.cshtml" />
     <Content Include="Views\Main\Login.cshtml" />
+    <Content Include="Views\User\ForgetPassword.cshtml" />
+    <Content Include="Views\User\ForgetPassword2.cshtml" />
+    <Content Include="Views\User\ForgetPassword3.cshtml" />
+    <Content Include="Views\User\ForgetPassword4.cshtml" />
+    <Content Include="Views\House\Index.cshtml" />
+    <Content Include="js\slick\fonts\slick.eot" />
+    <Content Include="js\slick\fonts\slick.ttf" />
+    <Content Include="js\slick\fonts\slick.woff" />
+    <Content Include="js\slick\slick.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZSZ.Common\ZSZ.Common.csproj">

@@ -9,6 +9,13 @@ namespace ZSZ.FrontWeb
   {
     public const string VERIFY_CODE = "verifyCode";
     public const string SMS_CODE = "smsCode";
+
     public const string PHONE_NUM = "phoneNum";
+    public const string FORGET_PWD_PHONENUM = "ForgetPasswordPhoneNum";
+    public const string FORGET_PWD2_OK = "ForgetPassword2_OK";
+
+    public const string USER_ID = "UserID";
+    public const string CITY_ID = "CityID";
+
   }
 }

@@ -14,15 +14,11 @@ namespace ZSZ.FrontWeb.Controllers
 {
   public class MainController : Controller
   {
-      public ICityService _CityService { get; set; }
+    public ICityService _CityService { get; set; }
     public IUserService _UserService { get; set; }
     public IIdNameService _ConfigService { get; set; }
 
-    // GET: Main
-    public ActionResult Index()
-    {
-      return View();
-    }
+
     [HttpGet]
     public ActionResult Register()
     {
@@ -126,10 +122,35 @@ namespace ZSZ.FrontWeb.Controllers
       else
       {
         _UserService.ResetLoginError(user.Id);
-        Session["UserId"] = user.Id;
-        Session["CityId"] = user.CityId;
+        Session[Consts.USER_ID] = user.Id;
+        Session[Consts.CITY_ID] = user.CityId;
         return Json(new AjaxResult { Status = "ok" });
       }
+    }
+
+    public ActionResult SwitchCityId(long cityId)
+    {
+      long? userId = FrontUtils.GetUserId(HttpContext);
+      if (!userId.HasValue)
+      {
+        Session[Consts.CITY_ID] = cityId;
+      }
+      else
+      {
+        _UserService.SetUserCityId(userId.Value, cityId);
+      }
+      return MVCHelper.ReturnJsonResult(AjaxResultEnum.ok);
+    }
+
+    // GET: Main
+    public ActionResult Index()
+    {
+      long cityId = FrontUtils.GetCityId(HttpContext);
+      string cityName = _CityService.GetById(cityId).Name;
+      ViewBag.cityName = cityName;
+
+      var cities = _CityService.GetAll();
+      return View(cities);
     }
   }
 }

@@ -32,7 +32,7 @@ namespace ZSZ.Common
       return sb.ToString();
     }
 
-    public static JsonResult ReturnJsonResult(AjaxResultEnum status, string msg)
+    public static JsonResult ReturnJsonResult(AjaxResultEnum status, string msg="")
     {
       return new JsonResult
       {
