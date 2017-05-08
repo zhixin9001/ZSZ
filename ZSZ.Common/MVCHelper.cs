@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace ZSZ.Common
       return sb.ToString();
     }
 
-    public static JsonResult ReturnJsonResult(AjaxResultEnum status, string msg="")
+    public static JsonResult ReturnJsonResult(AjaxResultEnum status, string msg = "")
     {
       return new JsonResult
       {
@@ -42,6 +43,40 @@ namespace ZSZ.Common
           Msg = msg
         }
       };
+    }
+
+    public static string ToQueryString(NameValueCollection nvc)
+    {
+      StringBuilder strb = new StringBuilder();
+      string value = string.Empty;
+      foreach (var key in nvc.AllKeys)
+      {
+        value = nvc[key];
+        strb.Append(key).Append("=").Append(Uri.EscapeDataString(value)).Append("&");
+      }
+
+      return strb.ToString().TrimEnd('&');
+    }
+
+    public static string RemoveQueryString(NameValueCollection nvc, string name)
+    {
+      var newNvc = new NameValueCollection(nvc);
+      newNvc.Remove(name);
+      return ToQueryString(newNvc);
+    }
+
+    public static string UpdateQueryString(NameValueCollection nvc, string name, string value)
+    {
+      var newNvc = new NameValueCollection(nvc);
+      if (newNvc.AllKeys.Contains(name))
+      {
+        newNvc[name] = value;
+      }
+      else
+      {
+        newNvc.Add(name, value);
+      }
+      return ToQueryString(newNvc);
     }
   }
 }

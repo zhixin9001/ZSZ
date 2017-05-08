@@ -173,6 +173,7 @@
     <Content Include="js\swiper.jquery.min.js" />
     <Content Include="js\swiper.min.js" />
     <Content Include="js\tchuang.js" />
+    <Content Include="js\template.js" />
     <Content Include="js\yhq.js" />
     <Content Include="slick\ajax-loader.gif" />
     <Content Include="slick\fonts\slick.svg" />
@@ -206,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HouseIndexViewModel.cs" />
+    <Compile Include="Models\HouseSearchViewModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Models\UserRegModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -236,6 +238,8 @@
     <Content Include="js\slick\fonts\slick.ttf" />
     <Content Include="js\slick\fonts\slick.woff" />
     <Content Include="js\slick\slick.scss" />
+    <Content Include="Views\House\Search.cshtml" />
+    <Content Include="Views\House\Search2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -208,11 +208,6 @@ namespace ZSZ.Service.Services
       }
     }
 
-    public HouseSearchResult Search(HouseSearchOptions options)
-    {
-      throw new NotImplementedException();
-    }
-
     public void Update(HouseDTO house)
     {
       using (var ctx = new ZszDBContext())
@@ -291,6 +286,70 @@ namespace ZSZ.Service.Services
       dto.AttachmentIds = entity.Attachments.Select(i => i.Id).ToArray();
 
       return dto;
+    }
+
+    public HouseSearchResult Search(HouseSearchOptions options)
+    {
+      using (ZszDBContext ctx = new ZszDBContext())
+      {
+        CommonService<HouseEntity> cs = new CommonService<HouseEntity>(ctx);
+        var items = cs.GetAll().Where(h => h.Community.Region.CItyId == options.CityId
+            && h.TypeId == options.TypeId);
+        if (options.RegionId != null)
+          items = items.Where(h => h.Community.RegionId == options.RegionId);
+        if (options.StartMonthRent != null)
+          items = items.Where(h => h.MonthRent >= options.StartMonthRent);
+        if (options.EndMonthRent != null)
+          items = items.Where(h => h.MonthRent <= options.EndMonthRent);
+        if (!string.IsNullOrEmpty(options.Keywords))
+          items = items.Where(h => h.Address.Contains(options.Keywords)
+              || h.Description.Contains(options.Keywords)
+              || h.Community.Name.Contains(options.Keywords)
+              || h.Community.Location.Contains(options.Keywords)
+              || h.Community.Traffic.Contains(options.Keywords));
+        long totalCount = items.LongCount();
+
+        items = items.Include(h => h.Attachments)
+             .Include(nameof(HouseEntity.Community) + "." + nameof(CommunityEntity.Region) + "." + nameof(RegionEntity.City))
+             .Include(h => h.DecorateStatus)
+             .Include(h => h.HousePics)
+             .Include(h => h.RoomType)
+             .Include(h => h.Status)
+             .Include(h => h.Type)
+             .Include(h => h.Attachments);
+
+        switch (options.OrderByType)
+        {
+          case OrderByType.AreaAsc:
+            items = items.OrderBy(t => t.Area);
+            break;
+          case OrderByType.AreaDesc:
+            items = items.OrderByDescending(t => t.Area);
+            break;
+          case OrderByType.MonthRentAsc:
+            items = items.OrderBy(t => t.MonthRent);
+            break;
+          case OrderByType.MonthRentDesc:
+            items = items.OrderByDescending(t => t.MonthRent);
+            break;
+          case OrderByType.CreateDateDesc:
+            items = items.OrderByDescending(t => t.CreateDateTime);
+            break;
+        }
+
+        items = items.Skip((options.CurrentIndex - 1) * options.PageSize)
+          .Take(options.PageSize);
+
+        HouseSearchResult searchResult = new HouseSearchResult();
+        searchResult.TotalCount = totalCount;
+        List<HouseDTO> houses = new List<HouseDTO>();
+        foreach (var item in items)
+        {
+          houses.Add(ToDTO(item));
+        }
+        searchResult.Result = houses.ToArray();
+        return searchResult;
+      }
     }
   }
 }
