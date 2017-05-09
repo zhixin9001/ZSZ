@@ -14,6 +14,8 @@ namespace ZSZ.FrontWeb.Controllers
     public IHouseService _HouseService { get; set; }
     public IAttachmentService _AttachmentService { get; set; }
     public IRegionService _RegionService { get; set; }
+    public IHouseAppointmentService _AppointmentService { get; set; }
+
     // GET: House
     public ActionResult Index(long id)
     {
@@ -164,6 +166,19 @@ namespace ZSZ.FrontWeb.Controllers
 
       var houses = searchResult.Result;
       return Json(new AjaxResult { Status = AjaxResultEnum.ok.ToString(), Data = houses });
+    }
+
+    public ActionResult MakeAppointment(HouseMakeAppointmentModel model)
+    {
+      if (!ModelState.IsValid)
+      {
+        return MVCHelper.ReturnJsonResult(AjaxResultEnum.error, MVCHelper.GetValidMsg(ModelState));
+      }
+
+      long? userId = FrontUtils.GetUserId(HttpContext);
+
+      _AppointmentService.AddNew(userId, model.Name, model.PhoneNum, model.HouseId, model.VisitDate);
+      return MVCHelper.ReturnJsonResult(AjaxResultEnum.ok);
     }
   }
 }

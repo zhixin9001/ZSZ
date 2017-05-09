@@ -2,7 +2,7 @@
   ViewBag.Title = "Index";
 }
 @model ZSZ.FrontWeb.Models.HouseIndexViewModel
-
+<link href="~/css/mui.picker.min.css" rel="stylesheet" />
 <body>
   <div class="headertwo clearfloat" id="header">
     <a href="javascript:history.go(-1)" class="fl box-s"><i class="iconfont icon-arrow-l fl"></i></a>
@@ -169,18 +169,18 @@
       <ul>
         <li class="clearfloat">
           <i class="iconfont icon-user"></i>
-          <input type="text" name="" id="" value="" placeholder="您的姓名" />
+          <input type="text" name="" id="name" value="" placeholder="您的姓名" />
         </li>
         <li class="clearfloat">
           <i class="iconfont icon-phone"></i>
-          <input type="text" name="" id="" value="" placeholder="您的手机号码" />
+          <input type="text" name="" id="phoneNum" value="" placeholder="您的手机号码" />
         </li>
         <li class="clearfloat">
           <i class="iconfont icon-calendar"></i>
-          <input type="text" name="" id="" value="" placeholder="请选择看房时间" />
+          <input type="text" name="" id="visitDate" value="" placeholder="请选择看房时间" />
         </li>
       </ul>
-      <input type="button" name="" id="" value="立即预约" class="btn" />
+      <input type="button" name="" id="btnMakeApp" value="立即预约" class="btn" />
     </div>
   </div>
   <!--弹窗内容 end-->
@@ -188,9 +188,10 @@
 </body>
 
 @section FooterScript{
-  <script type="text/javascript" src="~/js/slick/slick.min.js"></script>
-  <script type="text/javascript" src="~/js/tchuang.js"></script>
-  <script type="text/javascript" src="~/js/hmt.js"></script>
+  <script type="text/javascript" src="~/js/jquery.leanModal.min.js"></script>
+  <script type="text/javascript" src="~/slick/slick.min.js"></script>
+  <script type="text/javascript" src="~/js/mui.picker.min.js"></script>
+
   <script type="text/javascript">
     $('.one-time').slick({
       dots: true,
@@ -199,6 +200,45 @@
       slidesToShow: 1,
       touchMove: false,
       slidesToScroll: 1
+    });
+    $('#modaltrigger').leanModal({
+      top: 110,
+      overlay: 0.45,
+      closeButton: '.hidemodal'
+    });
+    $(function () {
+      $('#btnMakeApp').click(function () {
+        var houseId =@(Model.House.Id);
+        var name = $('#name').val();
+        var phoneNum = $('#phoneNum').val();
+        var visitDate = $('#visitDate').val();
+        $.ajax({
+          url: '/House/MakeAppointment',
+          data: { houseId: houseId, name: name, phoneNum: phoneNum, visitDate: visitDate },
+          type: 'post', dataType: 'json',
+          success: function (res) {
+            if (res.ststus == 'ok') {
+              alert("Your appointment has been reveived, we will contact you later");
+              $('#lean_overlay').fadeOut(200);
+              $('#loginmodal').css({'display':'none'});
+            } else {
+              alert(res.msg);
+            }
+          }
+        });
+      });
+    });
+    $(function () {
+      $('#visitDate').click(function () {
+        var dtPicker = new mui.DtPicker({ type: 'date' });
+        dtPicker.show(function (selectItems) {
+          var y = selectItems.y.text;
+          var m = selectItems.m.text;
+          var d = selectItems.d.text;
+          var visitDate = y + '-' + m + '-' + d;
+          $('visitDate').val(visitDate);
+        })
+      });
     });
   </script>
   <!--分享js-->
