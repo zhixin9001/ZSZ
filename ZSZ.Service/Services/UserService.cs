@@ -90,13 +90,9 @@ namespace ZSZ.Service.Services
 
       var csCity = new CommonService<CityEntity>(_ctx);
       var city = csCity.GetById(cityId);
-      if (city == null)
-      {
-        throw new ArgumentException("The city doesn't exist, cityId:" + cityId);
-      }
 
       //user.CityId = cityId;
-      user.City = city;
+      user.City = city ?? throw new ArgumentException("The city doesn't exist, cityId:" + cityId);
 
       _ctx.SaveChanges();
     }

@@ -293,13 +293,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\HasPermissionAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Consts.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HouseAppointmentController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="AdminUtils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -356,6 +359,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\House\PicList.cshtml" />
     <Content Include="Views\House\PicUpload.cshtml" />
+    <Content Include="Views\HouseAppointment\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

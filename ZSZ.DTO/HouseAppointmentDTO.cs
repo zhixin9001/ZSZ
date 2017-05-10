@@ -19,5 +19,6 @@ namespace ZSZ.DTO
     public DateTime? FollowDateTime { get; set; }
     public string RegionName { get; set; }
     public string CommunityName { get; set; }
+    public string HouseAddress { get; set; }
   }
 }

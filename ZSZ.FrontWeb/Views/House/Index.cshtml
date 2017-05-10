@@ -217,7 +217,7 @@
           data: { houseId: houseId, name: name, phoneNum: phoneNum, visitDate: visitDate },
           type: 'post', dataType: 'json',
           success: function (res) {
-            if (res.ststus == 'ok') {
+            if (res.status == 'ok') {
               alert("Your appointment has been reveived, we will contact you later");
               $('#lean_overlay').fadeOut(200);
               $('#loginmodal').css({'display':'none'});
@@ -236,7 +236,7 @@
           var m = selectItems.m.text;
           var d = selectItems.d.text;
           var visitDate = y + '-' + m + '-' + d;
-          $('visitDate').val(visitDate);
+          $('#visitDate').val(visitDate);
         })
       });
     });

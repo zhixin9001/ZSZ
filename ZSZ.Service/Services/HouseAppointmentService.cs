@@ -7,6 +7,7 @@ using ZSZ.DTO;
 using ZSZ.IService;
 using ZSZ.Service.Entities;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace ZSZ.Service.Services
 {
@@ -16,16 +17,22 @@ namespace ZSZ.Service.Services
     {
       using (var ctx = new ZszDBContext())
       {
+        var cs = new CommonService<HouseAppointEntity>(ctx);
+        //var appoint = cs.GetAll().Include(a => a.House)
+        //  .AsNoTracking().Where(a => a.PhoneNum == phoneNum && a.HouseId == houseId);
+        //if (appoint.Any()) throw new ArgumentException("You have appointed");
         var entity = new HouseAppointEntity()
         {
           UserId = userId,
           Name = name,
           PhoneNum = phoneNum,
           HouseId = houseId,
-          VisitDate = visitDate
+          VisitDate = visitDate,
+          Status = "未处理"
         };
 
         ctx.HouseAppointments.Add(entity);
+
         ctx.SaveChanges();
 
         return entity.Id;
@@ -34,7 +41,34 @@ namespace ZSZ.Service.Services
 
     public bool Follow(long adminUserId, long houseAppointmentId)
     {
-      throw new NotImplementedException();
+      bool isSucceed = false;
+
+      using (var ctx = new ZszDBContext())
+      {
+        var cs = new CommonService<HouseAppointEntity>(ctx);
+        var app = cs.GetById(houseAppointmentId);
+        if (app == null)
+        {
+          throw new ArgumentException("The appointment id doesn't exists");
+        }
+
+        if (app.FollowAdminUserId != null)
+        {
+          isSucceed = (app.FollowAdminUserId == adminUserId);
+        }
+
+        try
+        {
+          app.FollowAdminUserId = adminUserId;
+          ctx.SaveChanges();
+          isSucceed = true;
+        }
+        catch(DbUpdateConcurrencyException)
+        {
+          isSucceed = false;
+        }
+      }
+      return isSucceed;
     }
 
     public HouseAppointmentDTO GetById(long id)
@@ -96,7 +130,8 @@ namespace ZSZ.Service.Services
         VisitDate = entity.VisitDate,
         UserId = entity.UserId,
         CommunityName = entity.House.Community.Name,
-        RegionName = entity.House.Community.Region.Name
+        RegionName = entity.House.Community.Region.Name,
+        HouseAddress=entity.House.Address
       };
       if (entity.FollowAdminUser != null)
       {

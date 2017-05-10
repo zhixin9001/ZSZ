@@ -11,7 +11,8 @@ namespace ZSZ.Common
   public enum AjaxResultEnum
   {
     ok,
-    error
+    error,
+    fail
   }
   public class MVCHelper
   {
