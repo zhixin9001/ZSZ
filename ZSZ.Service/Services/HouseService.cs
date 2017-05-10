@@ -7,6 +7,8 @@ using ZSZ.DTO;
 using ZSZ.IService;
 using ZSZ.Service.Entities;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
+
 namespace ZSZ.Service.Services
 {
   public class HouseService : IHouseService
@@ -340,8 +342,10 @@ namespace ZSZ.Service.Services
         items = items.Skip((options.CurrentIndex - 1) * options.PageSize)
           .Take(options.PageSize);
 
-        HouseSearchResult searchResult = new HouseSearchResult();
-        searchResult.TotalCount = totalCount;
+        HouseSearchResult searchResult = new HouseSearchResult()
+        {
+          TotalCount = totalCount
+        };
         List<HouseDTO> houses = new List<HouseDTO>();
         foreach (var item in items)
         {
@@ -349,6 +353,16 @@ namespace ZSZ.Service.Services
         }
         searchResult.Result = houses.ToArray();
         return searchResult;
+      }
+    }
+
+    public int GetTodayNewHouseCount(long cityID)
+    {
+      using (ZszDBContext ctx = new ZszDBContext())
+      {
+        var cs = new CommonService<HouseEntity>(ctx);
+        return cs.GetAll().Count(h => h.Community.Region.CItyId == cityID
+          && SqlFunctions.DateDiff("hh", h.CreateDateTime, DateTime.Now) <= 24);
       }
     }
   }

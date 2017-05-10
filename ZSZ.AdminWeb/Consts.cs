@@ -18,5 +18,12 @@ namespace ZSZ.AdminWeb
     public const string CITY_ID = "CityID";
 
     public const string HOUSE_STATUS_UNHANDLED = "未处理";
+
+    public const string BOSS_EMAIL = "BossEmail";
+    public const string SMTP_SERVER = "SmtpServer";
+    public const string SMTP_USERNAME = "SmtpUserName";
+    public const string SMTP_PASSWORD = "SmtpPassword";
+    public const string SMTP_EMAIL = "SmtpEmail";
+
   }
 }

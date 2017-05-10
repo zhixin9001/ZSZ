@@ -32,6 +32,8 @@ namespace ZSZ.IService
     HouseSearchResult Search(HouseSearchOptions options);
 
     long GetCount(long cityId, DateTime startDateTime, DateTime endDateTime);
+
+    int GetTodayNewHouseCount(long cityID);
   }
 
   public class HouseSearchOptions
