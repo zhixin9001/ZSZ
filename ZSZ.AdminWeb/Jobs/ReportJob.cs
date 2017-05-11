@@ -32,7 +32,7 @@ namespace ZSZ.AdminWeb.Jobs
         {
           var _CityService = container.Resolve<ICityService>();
           var _HouseService = container.Resolve<IHouseService>();
-          var _SettingService = container.Resolve<ISettingService>();
+          var _SettingService = container.Resolve<IIdNameService>();
 
           bossEmails = _SettingService.GetValue(Consts.BOSS_EMAIL);
           smtpServer = _SettingService.GetValue(Consts.SMTP_SERVER);

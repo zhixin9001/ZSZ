@@ -64,8 +64,7 @@ namespace ZSZ.AdminWeb
       IScheduler sched = new StdSchedulerFactory().GetScheduler();
 
       JobDetailImpl jobBossReport = new JobDetailImpl("jbBossReport", typeof(ReportJob));
-      IMutableTrigger trigger = CronScheduleBuilder.DailyAtHourAndMinute(7, 13).Build();
-
+      IMutableTrigger trigger = CronScheduleBuilder.DailyAtHourAndMinute(10, 04).Build();
       trigger.Key = new TriggerKey("bossreport");
       sched.ScheduleJob(jobBossReport, trigger);
 
