@@ -103,8 +103,10 @@ namespace ZSZ.AdminWeb.Controllers
         TypeId = model.TypeId
       };
 
-
       long houseId = _HouseService.AddNew(dto);
+
+      CreateStaticPage(houseId);
+
       return Json(new AjaxResult { Status = "ok" });
     }
 
@@ -112,6 +114,23 @@ namespace ZSZ.AdminWeb.Controllers
     {
       var communities = _CommunityService.GetByRegionId(regionId);
       return Json(new AjaxResult { Status = "ok", Data = communities });
+    }
+
+    private void CreateStaticPage(long houseId)
+    {
+      var house = _HouseService.GetById(houseId);
+      var pics = _HouseService.GetPics(houseId);
+      var attachments = _AttachmentService.GetAttachments(houseId);
+
+      var model = new HouseIndexViewModel()
+      {
+        House = house,
+        Pics = pics,
+        Attachments = attachments
+      };
+
+      string html = MVCHelper.RenderViewToString(this.ControllerContext, @"~/Views/House/StaticIndex.cshtml", model);
+      System.IO.File.WriteAllText(@"D:\GitHub\ZSZ\ZSZ\ZSZ.FrontWeb\" + houseId + ".html", html);
     }
 
     [HttpGet]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +79,23 @@ namespace ZSZ.Common
         newNvc.Add(name, value);
       }
       return ToQueryString(newNvc);
+    }
+
+    public static string RenderViewToString(ControllerContext context, string viewPath, object model = null)
+    {
+      ViewEngineResult viewEnginResult = ViewEngines.Engines.FindView(context, viewPath, null);
+      if (viewEnginResult == null)
+      {
+        throw new FileNotFoundException("View " + viewPath + "cannot be found");
+      }
+      var view = viewEnginResult.View;
+      context.Controller.ViewData.Model = model;
+      using (var sw = new StringWriter())
+      {
+        var ctx = new ViewContext(context, view, context.Controller.ViewData, context.Controller.TempData, sw);
+        view.Render(ctx, sw);
+        return sw.ToString();
+      }
     }
   }
 }

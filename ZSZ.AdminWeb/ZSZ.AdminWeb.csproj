@@ -621,6 +621,7 @@
     <Compile Include="Models\HouseAddViewModel.cs" />
     <Compile Include="Models\HouseEditModel.cs" />
     <Compile Include="Models\HouseEditViewModel.cs" />
+    <Compile Include="Models\HouseIndexViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PermissionAddNewModel.cs" />
     <Compile Include="Models\PermissionEditModel.cs" />
@@ -667,6 +668,7 @@
     <Content Include="Views\House\PicList.cshtml" />
     <Content Include="Views\House\PicUpload.cshtml" />
     <Content Include="Views\HouseAppointment\List.cshtml" />
+    <Content Include="Views\House\StaticIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
