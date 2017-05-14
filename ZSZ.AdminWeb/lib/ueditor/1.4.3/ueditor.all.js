@@ -10145,7 +10145,6 @@ UE.plugins['defaultfilter'] = function () {
                             })
                         }
                         break;
-                        break;
                     case 'span':
                         val = node.getAttr('id');
                         if(val && /^_baidu_bookmark_/i.test(val)){

@@ -17,5 +17,6 @@ namespace ZSZ.FrontWeb
     public const string USER_ID = "UserID";
     public const string CITY_ID = "CityID";
 
+    public const string CACHE_SERVER = "MemCachedServers";
   }
 }

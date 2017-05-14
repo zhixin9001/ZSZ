@@ -66,6 +66,7 @@ namespace ZSZ.AdminWeb.Controllers
     }
     [HttpPost]
     [HasPermission("House.Add")]
+    [ValidateInput(false)]
     public ActionResult Add(HouseAddModel model)
     {
       var userId = SessionHelper.GetLoginId(HttpContext).Value;

@@ -17,6 +17,19 @@ using System.Threading.Tasks;
 using ZSZ.Common;
 using System.Net;
 using ZSZ.Service.Entities;
+using Qiniu.Common;
+using Qiniu.Util;
+using Qiniu.IO.Model;
+using Qiniu.IO;
+using Qiniu.Http;
+using Enyim.Caching.Configuration;
+using Enyim.Caching.Memcached;
+using Enyim.Caching;
+using System.Threading;
+using ServiceStack.Redis;
+using PlainElastic.Net;
+using PlainElastic.Net.Serialization;
+using PlainElastic.Net.Queries;
 
 namespace Tests
 {
@@ -160,11 +173,134 @@ namespace Tests
       //var s = new Random();
       #endregion
 
+      #region QiNiu
+      //var AK = "mPRqfvRKWQoGB2X0SOluytNuTA6Rn41K7XQlDM7c";
+      //var SK = "hM_YswqE79hwSTb4TVPZf7exG5RTclXeI53APU3z";
+      //Qiniu.Common.Config.AutoZone(AK, "zhixin9001", false);
 
-      //Console.WriteLine("OK");
 
+      //// 生成(上传)凭证时需要使用此Mac
+      //// 这个示例单独使用了一个Settings类，其中包含AccessKey和SecretKey
+      //// 实际应用中，请自行设置您的AccessKey和SecretKey
+      //Mac mac = new Mac(AK, SK);
+      //string bucket = "zhixin9001";
+      //string saveKey = "1.png";
+      //string localFile = "D:\\1.png";
+      //// 上传策略，参见 
+      //// https://developer.qiniu.com/kodo/manual/put-policy
+      //PutPolicy putPolicy = new PutPolicy();
+      //// 如果需要设置为"覆盖"上传(如果云端已有同名文件则覆盖)，请使用 SCOPE = "BUCKET:KEY"
+      //// putPolicy.Scope = bucket + ":" + saveKey;
+      //putPolicy.Scope = bucket;
+      //// 上传策略有效期(对应于生成的凭证的有效期)          
+      //putPolicy.SetExpires(3600);
+      //// 上传到云端多少天后自动删除该文件，如果不设置（即保持默认默认）则不删除
+      //putPolicy.DeleteAfterDays = 1;
+      //// 生成上传凭证，参见
+      //// https://developer.qiniu.com/kodo/manual/upload-token            
+      //string jstr = putPolicy.ToJsonString();
+      //string token = Auth.CreateUploadToken(mac, jstr);
+      //UploadManager um = new UploadManager();
+      //HttpResult result = um.UploadFile(localFile, saveKey, token);
+      //Console.WriteLine(result);
+      #endregion
+
+      #region Memcached
+      //MemcachedClientConfiguration config = new MemcachedClientConfiguration();
+      //config.Servers.Add(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 11211));
+      //config.Protocol = MemcachedProtocol.Binary;
+      //MemcachedClient client = new MemcachedClient(config);
+      //var p = new Person { Id = 3, Name = "yzk" };
+      ////保存到缓存中
+      ////HttpContext.Cache.Insert(cacheKey, model, null,
+      ////DateTime.Now.AddSeconds(1),TimeSpan.Zero);
+      //client.Store(StoreMode.Set, "p" + p.Id, p, DateTime.Now.AddSeconds(3));//还可以指定第四个参数指定数据的过期时间。
+      //Thread.Sleep(2000);
+
+      //Person p1 = client.Get<Person>("p3");//HttpContext.Cache[cacheKey]
+      //Console.WriteLine(p1.Name);
+      //Thread.Sleep(2000);
+      //p1 = client.Get<Person>("p3");
+      //Console.WriteLine(p1.Name);
+      #endregion
+
+      #region Redis
+      //PooledRedisClientManager redisMgr = new PooledRedisClientManager("127.0.0.1");
+      //using (IRedisClient redisClient = redisMgr.GetClient())
+      //{
+      //  var p = new Person { Id = 3, Name = "yzk" };
+      //  //redisClient.Set("p", p,DateTime.Now.AddSeconds(3));
+      //  redisClient.Set("p3", p, TimeSpan.FromSeconds(6));
+      //  Thread.Sleep(2000);
+      //  var p1 = redisClient.Get<Person>("p3");
+      //  Console.WriteLine(p1.Name);
+      //  Thread.Sleep(2000);
+      //  p1 = redisClient.Get<Person>("p3");
+      //  Console.WriteLine(p1.Name);
+      //}
+      #endregion
+
+      #region ElasticSearch
+      Person p1 = new Person()
+      {
+        Id = 1,
+        Name = "P1",
+        Age = 10,
+        Desc = "P1 Person"
+      };
+
+      ElasticConnection client = new ElasticConnection("localhost",9200);
+      var serializer = new JsonNetSerializer();
+      IndexCommand cmd = new IndexCommand("zsz", "persons", p1.Id.ToString());
+      var ss = serializer.Serialize(p1);
+      OperationResult result = client.Put(cmd, ss);
+      var indexResult = serializer.ToIndexResult(result.Result);
+      if (indexResult.created)
+      {
+        Console.WriteLine("Created successfully");
+      }
+      else
+      {
+        Console.WriteLine(indexResult.status + "-" + indexResult._version);
+      }
+
+      SearchCommand sCmd = new SearchCommand("zsz", "persons");
+      var query = new QueryBuilder<Person>().Query(
+          b => b.Bool(
+              m => m.Must(
+                  t => t.QueryString(
+                      t1 => t1.DefaultField("Desc").Query("P")
+                    )
+                )
+            )
+        ).Build();
+
+      var resultS = client.Post(sCmd, query);
+      var serializerS = new JsonNetSerializer();
+      var searchResult = serializer.ToSearchResult<Person>(resultS);
+      if (searchResult.Documents.Count() <= 0)
+      {
+        Console.WriteLine("No items found");
+      }
+      else
+      {
+        foreach (var doc in searchResult.Documents)
+        {
+          Console.WriteLine(doc.Id + "," + doc.Name + "," + doc.Age);
+        }
+      }
+      
+      #endregion
 
       Console.ReadKey();
+    }
+    //[Serializable]
+    public class Person
+    {
+      public int Id { get; set; }
+      public string Name { get; set; }
+      public int Age { get; set; }
+      public string Desc { get; set; }
     }
 
     public static int Add(int i, int j)

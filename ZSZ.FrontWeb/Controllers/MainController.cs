@@ -17,8 +17,7 @@ namespace ZSZ.FrontWeb.Controllers
     public ICityService _CityService { get; set; }
     public IUserService _UserService { get; set; }
     public IIdNameService _ConfigService { get; set; }
-
-
+    
     [HttpGet]
     public ActionResult Register()
     {
