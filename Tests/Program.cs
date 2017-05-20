@@ -210,7 +210,7 @@ namespace Tests
       //config.Servers.Add(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 11211));
       //config.Protocol = MemcachedProtocol.Binary;
       //MemcachedClient client = new MemcachedClient(config);
-      //var p = new Person { Id = 3, Name = "yzk" };
+      //var p = new Person { Id = 3, Name = "yzx" };
       ////保存到缓存中
       ////HttpContext.Cache.Insert(cacheKey, model, null,
       ////DateTime.Now.AddSeconds(1),TimeSpan.Zero);
@@ -228,7 +228,7 @@ namespace Tests
       //PooledRedisClientManager redisMgr = new PooledRedisClientManager("127.0.0.1");
       //using (IRedisClient redisClient = redisMgr.GetClient())
       //{
-      //  var p = new Person { Id = 3, Name = "yzk" };
+      //  var p = new Person { Id = 3, Name = "yzx" };
       //  //redisClient.Set("p", p,DateTime.Now.AddSeconds(3));
       //  redisClient.Set("p3", p, TimeSpan.FromSeconds(6));
       //  Thread.Sleep(2000);

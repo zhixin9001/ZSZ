@@ -120,7 +120,7 @@ public class UploadHandler : Handler
       string token = Auth.CreateUploadToken(mac, jstr);
       UploadManager um = new UploadManager();
 
-      string saveKey = CommonHelper.CalcMD5(uploadFileBytes)+ Path.GetExtension(uploadFileName);
+      string saveKey = CommonHelper.CalcMD5(uploadFileBytes) + Path.GetExtension(uploadFileName);
       HttpResult result = um.UploadData(uploadFileBytes, saveKey, token);
 
       Result.Url = saveKey;
